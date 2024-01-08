@@ -1650,6 +1650,7 @@ p.excerpt {
 }
 
 .single-latest-news {
+  height: 650px;
   margin-bottom: 30px;
 }
 .single-latest-board {
@@ -2442,13 +2443,13 @@ td.product-image img {
 }
 
 .cart-table-wrap tbody tr td {
-  border: 1px solid #efefef;
   padding: 20px 0;
   color: #BD2000;
 }
 
 thead.cart-table-head tr {
-  background-color: #efefef;
+  color: white;
+  background-color: #BD2000;
 }
 
 td.product-quantity input {
@@ -2467,7 +2468,8 @@ td.product-remove a {
 }
 
 tr.table-total-row {
-  background-color: #efefef;
+  color: white;
+  background-color: #BD2000;
 }
 
 tr.table-total-row th {
@@ -2547,8 +2549,9 @@ tr.total-data td h6 {
 }
 
 .billing-address-form {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+ border-radius: 5px;
 
-  border: 1px solid #ddd;
   padding: 20px;
 }
 
@@ -2561,7 +2564,7 @@ tr.total-data td h6 {
 
 .billing-address-form form p textarea {
   width: 100%;
-  border-radius: 3px;
+  border-radius: 5px;
   border: 1px solid #ddd;
   padding: 15px;
   height: 120px;
