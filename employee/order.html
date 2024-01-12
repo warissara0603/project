@@ -55,9 +55,6 @@
         background-color: #bd2000;
         color: white;
       }
-      .bank-number{
-        width: 100px;
-      }
       td{
         padding: 10px;
         height: 150px;
@@ -65,11 +62,12 @@
       img{
         width: 150px;
       }
-      .consignment{
-        margin-left: 81%;
-        border-radius: 10px;
+      .order{
+        width: 100px;
+        margin: 10px;
+        border-radius: 5px;
       }
-      .consignment:hover {
+      .order:hover {
         box-shadow: 0 7px 9px 0 rgba(0,0,0,0.24), 0 5px 20px 0 rgba(0,0,0,0.19);
 
       }
@@ -98,8 +96,8 @@
               </div>
               <!-- logo -->
 
-              <!-- menu start -->
-              <nav class="main-menu">
+               <!-- menu start -->
+               <nav class="main-menu">
                 <ul>
                   <li class="current-list-item">
                     <a href="index.html">หน้าแรก</a>
@@ -113,7 +111,10 @@
                   <li><a href="news.html">ประชาสัมพันธ์</a></li>
                   <li><a href="contact.html">ติดต่อ</a></li>
                   <li>
-                    <a href="consignment.html">ฝากขายสินค้า</a>
+                    <a href="consignment.html">ฝากขาย</a>
+                  </li>
+                  <li>
+                    <a href="#">คำสั่งซื้อ</a>
                   </li>
                   <li>
                     <div
@@ -121,16 +122,13 @@
                       style="font-size: 14px; margin-left: 25px"
                     >
                       
-                      <div class="dropdown" style="float: right">
-                        <a class="member"
-                          ><i class="fas fa-user-friends"> </i> สหกรณ์ชุมชน</a
-                        >
-                        <div class="dropdown-content">
-                          <a href="../index.html" style="color: black"
-                            >ออกจากระบบ</a
-                          >
+                      <div class="dropdown" style="float:right;">
+                        <a class="member"><i class="	fas fa-user-friends">
+                          </i> พนักงาน</a>
+                        <div class="dropdown-content" >
+                          <a href="../index.html"style="color: black;">ออกจากระบบ</a>
+                          </div>
                         </div>
-                      </div>
                     </div>
                   </li>
                 </ul>
@@ -152,7 +150,7 @@
           <div class="col-lg-8 offset-lg-2 text-center">
             <div class="breadcrumb-text">
               <p>ร้านเฮ็ดก้อเหลียว</p>
-              <h1>ฝากขายสินค้า</h1>
+              <h1>รายการสั่งซื้อ</h1>
             </div>
           </div>
         </div>
@@ -161,36 +159,44 @@
     <!-- end breadcrumb section -->
 
     <!-- check out section -->
-    <h3 style="margin-top: 100px; text-align: center;">รายการสินค้าทั้งหมด</h3>
-    <div class="checkout-section mt-50 mb-150">
+    <h3 style="margin-top: 100px; text-align: center;">รายการสั่งซื้อทั้งหมด</h3>
+    <div class="checkout-section mt-70 mb-150">
       <div class="container">
-          <a href="addproduct.html"><button class="consignment">ฝากขายสินค้า</button></a>
         <div class="row">
           <div class="card-body">
             <div class="cart-table-wrap">
               <table class="cart-bank" style="background-color: #f2f2f2">
                 <thead class="cart-bank-head">
                   <tr class="bank-head-row text-center">
-                    <th class="bank-number">ลำดับ</th>
-                    <th class="bank-picture">รูปสินค้า</th>
-                    <th class="bank-name">ชื่อสินค้า</th>
-                    <th class="bank-details">รายละเอียดสินค้า</th>
-                    <th class="bank-type">ประเภทสินค้า</th>
-                    <th class="bank-price">ราคา</th>
-                    <th class="bank-quantity">จำนวน</th>
-                    <th class="bank-quantity">ชื่อผู้ฝากขาย</th>
+                    <th class="bank-number" style="width: 100px;">ลำดับ</th>
+                    <th class="bank-picture">ชื่อ - นามสกุล</th>
+                    <th class="bank-name" style="width: 500px;">ที่อยู่</th>
+                    <th class="bank-details">เบอร์โทร</th>
+                    <th class="bank-type">หมายเหตุ</th>
+                    <th class="bank-price">จำนวนเงิน</th>
+                    <th class="bank-quantity">วันที่</th>
+                    <th class="bank-quantity">เวลาที่ชำระ</th>
+                    <th class="bank-quantity">รูป</th>
+                    <th ></th>
+                    
                   </tr>
                 </thead>
                 <tbody style="height: 50px">
                   <tr class="bank-body-row text-center">
                     <td class="bank-number">1</td>
-                    <td class="bank-picture"><img src="../assets/img/products/สินค้า 1.jpg" alt=""></td>
-                    <td class="bank-name">ชื่อสินค้า</td>
-                    <td class="bank-details">รายละเอียดสินค้า</td>
-                    <td class="bank-type">ประเภทสินค้า</td>
-                    <td class="bank-price">ราคา</td>
-                    <td class="bank-quantity">จำนวน</td>
-                    <td class="bank-quantity">ชื่อผู้ฝากขาย</td>
+                    <td class="bank-name">วริศรา</td>
+                    <td class="bank-details">95/6 บ่อสร้าง</td>
+                    <td class="bank-type">0954822801</td>
+                    <td class="bank-details">หมายเหตุ</td>
+                    <td class="bank-price">550</td>
+                    <td class="bank-quantity">12/1/2024</td>
+                    <td class="bank-quantity">19.00</td>
+                    <td class="bank-picture"><img src="../assets/img/ex1.jpg" alt=""></td>
+                    <td>
+                      <div >
+                      <a href="examine.html"><button class="order">ตรวจสอบ</button></a>
+                    </div>
+                    </td>
                   </tr>
                 </tbody>
               </table>
