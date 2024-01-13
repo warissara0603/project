@@ -1,3 +1,12 @@
+<?php
+  session_start();
+
+  if(!$_SESSION['userid']){
+    header("Location: index.php");
+  } else {
+
+?>
+
 <!DOCTYPE html>
 <html lang="en" class="">
 <head>
@@ -71,7 +80,7 @@
       </div>
       <div class="navbar-item dropdown has-divider has-user-avatar">
         <a class="navbar-link">
-          <div class="is-user-name"><span>ผู้ดูแลระบบ</span></div>
+          <div class="is-user-name"><span><?php echo $_SESSION['username']?></span></div>
           <span class="icon"><i class="mdi mdi-chevron-down"></i></span>
         </a>
         <div class="navbar-dropdown">
@@ -84,7 +93,7 @@
             <span>ตั้งค่า</span>
           </a>
           <hr class="navbar-divider">
-          <a class="navbar-item">
+          <a href="../logout.php" class="navbar-item" >
             <span class="icon"><i class="mdi mdi-logout"></i></span>
             <span>ออกจากระบบ</span>
           </a>
@@ -413,3 +422,5 @@
 
 </body>
 </html>
+
+<?php } ?>

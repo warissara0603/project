@@ -1,3 +1,85 @@
+<?php
+  session_start();
+  require_once "connectDB.php";
+
+  if(isset($_POST['submitregister'])){
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $phone = $_POST['phone'];
+    $address = $_POST['address'];
+    
+
+    $user_check = "SELECT * FROM user WHERE username = '$username' LIMIT 1";
+    $result = mysqli_query($connectdb,$user_check);
+    $user = mysqli_fetch_assoc($result);
+
+    if($user['username']===$username){
+      echo "<script>alert('ชื่อผู้ใช้นี้มีคนใช้แล้ว');</script>";
+    }else{
+      $passwordenc = md5($password);
+
+      $query = "INSERT INTO user (username, password, name, email, phone, address, status)
+                VALUE('$username','$passwordenc','$name','$email','$phone','$address','m')";
+
+      $result = mysqli_query($connectdb, $query);
+
+      if($result){
+        $_SESSION['success'] = "เพิ่มข้อมูลสมาชิกสำเร็จ";
+        header("Location: index.php");
+      }else{
+        $_SESSION['error'] = "เพิ่มข้อมูลสมาชิกผิดพลาด";
+        header("Location: index.php");
+      }
+
+
+    }
+  }
+
+  if(isset($_POST['submitlogin'])){
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    $passwordenc = md5($password);
+
+    $query = "SELECT * FROM user WHERE username = '$username' AND password = '$passwordenc'";
+
+    $result = mysqli_query($connectdb, $query);
+
+    if(mysqli_num_rows($result) == 1){
+      $row = mysqli_fetch_array($result);
+
+      $_SESSION['userid'] = $row['user_id'];
+      $_SESSION['username'] = $row['name'];
+      $_SESSION['status'] = $row['status'];
+
+      if($_SESSION['status'] == 'a'){
+        header("Location: /project/admin/index.php");
+      }
+
+      if($_SESSION['status'] == 'm'){
+        header("Location: /project/member/index.php");
+      }
+
+      if($_SESSION['status'] == 'c'){
+        header("Location: /project/cooperative/index.php");
+      }
+
+      if($_SESSION['status'] == 'e'){
+        header("Location: /project/employee/index.php");
+      }
+
+      if($_SESSION['status'] == 'g'){
+        header("Location: /project/manager/index.php");
+      }
+    } else {
+      echo "<script>alert('ผู้ใช้งาน หรือ รหัสผ่านไม่ถูกต้อง');</script>";
+    } 
+  }
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -111,18 +193,19 @@
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i><span aria-hidden="true"></span></button>
           <div class="modal-body">
             <img src="assets/img/logo_two.png" alt="" style="width: 250px; ">
-
               <p class="description">เข้าสู่ระบบโดยใช้ ชื่อผู้ใช้ และ รหัสผ่าน</p>
+              <form class="login-form" action = "<?php echo $_SERVER['PHP_SELF'];?>" method = "post">
               <div class="form-group">
                   <span class="input-icon"><i class="fa fa-user"></i></span>
-                  <input type="Username" class="form-control" placeholder="ชื่อผู้ใช้">
+                  <input type="Username" name="username" class="form-control" placeholder="ชื่อผู้ใช้" required>
               </div>
               <div class="form-group">
                   <span class="input-icon"><i class="fas fa-key"></i></span>
-                  <input type="password" class="form-control" placeholder="รหัสผ่าน">
+                  <input type="password" name="password" class="form-control" placeholder="รหัสผ่าน" required>
               </div>
           
-              <a href="member/index.html"><button class="btn">เข้าสู่ระบบ</button></a>
+              <button type="submit" name="submitlogin" value="Submit" class="btn">เข้าสู่ระบบ</button>
+              </form>
           </div>
       </div>
   </div>
@@ -139,36 +222,36 @@
 			<img src="assets/img/logo_two.png" alt="" style="width: 150px; ">
 			<h3 style="margin-bottom: 20px;">สมัครสมาชิก</h3>
 		  </div>
-		  <form class="login-form">
+		  <form class="login-form" action = "<?php echo $_SERVER['PHP_SELF'];?>" method = "post">
 			<div class="form-group ">
 			  <label for="username">ชื่อ - นามสกุล</label>
-			  <input type="text" class="form-control" id="name" placeholder="กรุณาใส่ชื่อ - นามสกุล">
+			  <input type="text" class="form-control" name="name" placeholder="กรุณาใส่ชื่อ - นามสกุล" required>
 			</div>
 			<div class="form-group ">
 			  <label for="username">ชื่อผู้ใช้</label>
-			  <input type="text" class="form-control" id="username" placeholder="กรุณาใส่ชื่อผู้ใช้">
+			  <input type="text" class="form-control" name="username" placeholder="กรุณาใส่ชื่อผู้ใช้" required>
 			</div>
 			<div class="form-group ">
 			  <label for="password">รหัสผ่าน</label>
-			  <input type="password" class="form-control" id="password" placeholder="กรุณาใส่รหัสผ่าน">
+			  <input type="password" class="form-control" name="password" placeholder="กรุณาใส่รหัสผ่าน" required>
 			</div>
 			<div class="form-group">
 			  <label for="email">อีเมล์</label>
-			  <input type="email" class="form-control" id="email" placeholder="กรุณาใส่อีเมล์">
+			  <input type="email" class="form-control" name="email" placeholder="กรุณาใส่อีเมล์" required>
 			</div>
 			<div class="form-group">
-			  <label for="number">เบอร์โทรศัพท์</label>
-			  <input type="text" class="form-control" id="number" maxlength="10" size="10"placeholder="กรุณาใส่เบอร์โทรศัพท์">
+			  <label for="phone">เบอร์โทรศัพท์</label>
+			  <input type="text" class="form-control" name="phone" maxlength="10" size="10"placeholder="กรุณาใส่เบอร์โทรศัพท์" required>
 			</div>
 			<div class="form-group">
 			  <label for="tel">ที่อยู่</label>
-			  <textarea name="address" cols="30" rows="5" style="padding: 10px;width: 100%;height:200px; border: 2px solid #eee; border-radius: 15px;"></textarea>
+			  <textarea name="address" cols="30" rows="5" style="padding: 10px;width: 100%;height:200px; border: 2px solid #eee; border-radius: 15px;" required></textarea>
 			</div>
-			</form>
-			<br>
+      <br>
 		  <div class="button">
-			<a href="member/index.html"><button type="submit" class="btn">สมัครสมาชิก</button></a>
+			  <button type="submit" name="submitregister" value="Submit" class="btn">สมัครสมาชิก</button>
 		  </div>
+			</form>
 		</div>
 	  </div>
   

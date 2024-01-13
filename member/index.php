@@ -1,3 +1,12 @@
+<?php
+  session_start();
+
+  if(!$_SESSION['userid']){
+    header("Location: index.php");
+  } else {
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -87,28 +96,31 @@
                   <li><a href="news.html">ประชาสัมพันธ์</a></li>
                   <li><a href="contact.html">ติดต่อ</a></li>
                   <li>
-                    <a href="consignment.html">ฝากขาย</a>
-                  </li>
-                  <li>
-                    <a href="order.html">คำสั่งซื้อ</a>
+                    <a href="Orderlist.html">รายการสั่งซื้อ</a>
                   </li>
                   <li>
                     <div
                       class="header-icons"
                       style="font-size: 14px; margin-left: 25px"
                     >
-                      
+                      <a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
                       <div class="dropdown" style="float:right;">
-                        <a class="member"><i class="	fas fa-user-friends">
-                          </i> พนักงาน</a>
-                        <div class="dropdown-content" >
-                          <a href="../index.html"style="color: black;">ออกจากระบบ</a>
-                          </div>
+                      <a class="member" href="information.html"
+                        ><i
+                          class="	fas fa-user-friends"
+                        ></i
+                      > <?php echo $_SESSION['username']?></a>
+                      <div class="dropdown-content" >
+                        <a href="information.html"style="color: black;">ข้อมูลส่วนตัว</a>
+                        <a href="#"style="color: black;">ลบบัญชี</a>
+                        <a href="../logout.php"style="color: black;">ออกจากระบบ</a>
                         </div>
+                      </div>
                     </div>
                   </li>
                 </ul>
               </nav>
+
               <div class="mobile-menu"></div>
               <!-- menu end -->
             </div>
@@ -454,10 +466,10 @@
               <h2 class="widget-title">หน้า</h2>
               <ul>
                 <li><i class="fas fa-angle-right" style="padding-right: 15px;"></i><a href="index.html">หน้าหลัก</a></li>
-			          <li><i class="fas fa-angle-right" style="padding-right: 15px;"></i><a href="shop.html">ผลิตภัณฑ์</a></li>
-			          <li><i class="fas fa-angle-right" style="padding-right: 15px;"></i><a href="board.html">โปรโมชั่น</a></li>
-			          <li><i class="fas fa-angle-right" style="padding-right: 15px;"></i><a href="news.html">ประชาสัมพันธ์</a></li>
-			          <li><i class="fas fa-angle-right" style="padding-right: 15px;"></i><a href="contact.html">ติดต่อ</a></li>
+			  <li><i class="fas fa-angle-right" style="padding-right: 15px;"></i><a href="shop.html">ผลิตภัณฑ์</a></li>
+			  <li><i class="fas fa-angle-right" style="padding-right: 15px;"></i><a href="board.html">โปรโมชั่น</a></li>
+			  <li><i class="fas fa-angle-right" style="padding-right: 15px;"></i><a href="news.html">ประชาสัมพันธ์</a></li>
+			  <li><i class="fas fa-angle-right" style="padding-right: 15px;"></i><a href="contact.html">ติดต่อ</a></li>
               </ul>
             </div>
           </div>
@@ -528,3 +540,5 @@
     <script src="../assets/js/main.js"></script>
   </body>
 </html>
+
+<?php } ?>
