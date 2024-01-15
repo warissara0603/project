@@ -195,7 +195,7 @@ if (!$_SESSION['userid']) {
                 ผู้ประกอบการสินค้าชุมชนซึ่งภายในร้านดังกล่าวจัดให้มีการจำหน่ายสินค้า ฯ
                 ของทุกอำเภอในจังหวัดแม่ฮ่องสอน
               </p>
-              <a href="about.php" class="boxed-btn mt-4">ดูเพิ่มเติม</a>
+              <a href="contact.php" class="boxed-btn mt-4">ดูเพิ่มเติม</a>
             </div>
           </div>
         </div>
