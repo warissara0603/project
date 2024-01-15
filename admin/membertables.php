@@ -1,28 +1,19 @@
-<?php
-  session_start();
-
-  if(!$_SESSION['userid']){
-    header("Location: index.php");
-  } else {
-
-?>
-
 <!DOCTYPE html>
 <html lang="en" class="">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- title -->
-  <title>Hedkorleaw</title>
+ <!-- title -->
+ <title>Hedkorleaw</title>
 
-  <!-- favicon -->
-  <link rel="shortcut icon" type="image/png" href="../assets/img/firstpage/logo_one.png" />
-  <!-- google font -->
-  <link
-    href="https://fonts.googleapis.com/css?family=Noto Sans Thai"
-    rel="stylesheet"
-  />
+ <!-- favicon -->
+ <link rel="shortcut icon" type="image/png" href="../assets/img/firstpage/logo_one.png" />
+ <!-- google font -->
+ <link
+   href="https://fonts.googleapis.com/css?family=Noto Sans Thai"
+   rel="stylesheet"
+ />
 
   <!-- Tailwind is included -->
   <link rel="stylesheet" href="css/main.css?v=1628755089081">
@@ -63,36 +54,36 @@
 <body>
 
 <div id="app">
-<nav id="navbar-main" class="navbar is-fixed-top">
-  <div class="navbar-brand">
-    <a class="navbar-item mobile-aside-button">
-      <span class="icon"><i class="mdi mdi-forwardburger mdi-24px"></i></span>
-    </a>
-    
-  </div>
-  <div class="navbar-brand is-right">
-    <a class="navbar-item --jb-navbar-menu-toggle" data-target="navbar-menu">
-      <span class="icon"><i class="mdi mdi-dots-vertical mdi-24px"></i></span>
-    </a>
-  </div>
-  <div class="navbar-menu" id="navbar-menu">
-    <div class="navbar-end">
-      </div>
-      <div class="navbar-item dropdown has-divider has-user-avatar">
-        <a class="navbar-link">
-          <div class="is-user-name"><span><?php echo $_SESSION['username']?></span></div>
-          <span class="icon"><i class="mdi mdi-chevron-down"></i></span>
-        </a>
-        <div class="navbar-dropdown">
-          <a href="profile.php" class="navbar-item">
-            <span class="icon"><i class="mdi mdi-account"></i></span>
-            <span>My Profile</span>
+  <nav id="navbar-main" class="navbar is-fixed-top">
+    <div class="navbar-brand">
+      <a class="navbar-item mobile-aside-button">
+        <span class="icon"><i class="mdi mdi-forwardburger mdi-24px"></i></span>
+      </a>
+      
+    </div>
+    <div class="navbar-brand is-right">
+      <a class="navbar-item --jb-navbar-menu-toggle" data-target="navbar-menu">
+        <span class="icon"><i class="mdi mdi-dots-vertical mdi-24px"></i></span>
+      </a>
+    </div>
+    <div class="navbar-menu" id="navbar-menu">
+      <div class="navbar-end">
+        </div>
+        <div class="navbar-item dropdown has-divider has-user-avatar">
+          <a class="navbar-link">
+            <div class="is-user-name"><span>ผู้ดูแลระบบ</span></div>
+            <span class="icon"><i class="mdi mdi-chevron-down"></i></span>
           </a>
-          <a class="navbar-item">
-            <span class="icon"><i class="mdi mdi-settings"></i></span>
-            <span>ตั้งค่า</span>
-          </a>
-          <hr class="navbar-divider">
+          <div class="navbar-dropdown">
+            <a href="profile.php" class="navbar-item">
+              <span class="icon"><i class="mdi mdi-account"></i></span>
+              <span>My Profile</span>
+            </a>
+            <a class="navbar-item">
+              <span class="icon"><i class="mdi mdi-settings"></i></span>
+              <span>ตั้งค่า</span>
+            </a>
+            <hr class="navbar-divider">
           <a href="../logout.php" class="navbar-item" >
             <span class="icon"><i class="mdi mdi-logout"></i></span>
             <span>ออกจากระบบ</span>
@@ -103,167 +94,111 @@
         <span class="icon"><i class="mdi mdi-logout"></i></span>
         <span>Log out</span>
       </a>
+          </div>
+        </div>
+        <a title="Log out" class="navbar-item desktop-icon-only">
+          <span class="icon"><i class="mdi mdi-logout"></i></span>
+        </a>
+      </div>
     </div>
-  </div>
-</nav>
-
-<aside class="aside is-placed-left is-expanded">
-  <div class="aside-tools">
-    <div>
-      <img src="../assets/img/logo_four_white.png" alt="">
+  </nav>
+  
+  <aside class="aside is-placed-left is-expanded">
+    <div class="aside-tools">
+      <div>
+        <img src="../assets/img/logo_four_white.png" alt="">
+      </div>
     </div>
-  </div>
-  <div class="menu is-menu-main">
-    <ul class="menu-list">
-      <li class="active">
-        <a href="index.php">
-          <span class="icon"><i class="mdi mdi-desktop-mac"></i></span>
-          <span class="menu-item-label">หน้าหลัก</span>
-        </a>
-      </li>
-    </ul>
-    <p class="menu-label">เมนู</p>
-    <ul class="menu-list">
-      <li>
-        <a class="dropdown">
-          <span class="icon"><i class="mdi mdi-account-circle"></i></span>
-          <span class="menu-item-label">ข้อมูลผู้ใช้</span>
-          <span class="icon"><i class="mdi mdi-plus"></i></span>
-        </a>
-        <ul>
-          <li>
-            <a href="employeetables.php">
-              <span>พนักงาน</span>
-            </a>
-          </li>
-          <li>
-            <a href="membertables.php">
-              <span>สมาชิก</span>
-            </a>
-          </li>
-        </ul>
-      </li>
-      <li class="--set-active-tables-html">
-        <a href="news.php">
-          <span class="icon"><i class="mdi mdi-square-edit-outline"></i></span>
-          <span class="menu-item-label">ข่าวประชาสัมพันธ์</span>
-        </a>
-      </li>
-      <li class="--set-active-forms-html">
-        <a href="board.php">
-          <span class="icon"><i class="mdi mdi-square-edit-outline"></i></span>
-          <span class="menu-item-label">โปรโมชั่นสินค้า</span>
-        </a>
-      </li>
-      <li>
-        <a class="dropdown">
-          <span class="icon"><i class="mdi mdi-view-list"></i></span>
-          <span class="menu-item-label">รายงาน</span>
-          <span class="icon"><i class="mdi mdi-plus"></i></span>
-        </a>
-        <ul>
-          <li>
-            <a href="#void">
-              <span>การขายสินค้าประจำเดือน</span>
-            </a>
-          </li>
-          <li>
-            <a href="#void">
-              <span>การขายสินค้าประจำปี</span>
-            </a>
-          </li>
-          <li>
-            <a href="#void">
-              <span>การสินค้าขายดีประจำเดือน</span>
-            </a>
-          </li>
-          <li>
-            <a href="#void">
-              <span>การสินค้าขายดีประจำปี</span>
-            </a>
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </div>
-</aside>
-
+    <div class="menu is-menu-main">
+      <ul class="menu-list">
+        <li class="active">
+          <a href="index.php">
+            <span class="icon"><i class="mdi mdi-desktop-mac"></i></span>
+            <span class="menu-item-label">หน้าหลัก</span>
+          </a>
+        </li>
+      </ul>
+      <p class="menu-label">เมนู</p>
+      <ul class="menu-list">
+        <li>
+          <a class="dropdown">
+            <span class="icon"><i class="mdi mdi-account-circle"></i></span>
+            <span class="menu-item-label">ข้อมูลผู้ใช้</span>
+            <span class="icon"><i class="mdi mdi-plus"></i></span>
+          </a>
+          <ul>
+            <li>
+              <a href="employeetables.php">
+                <span>พนักงาน</span>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <span>สมาชิก</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="--set-active-tables-html">
+          <a href="news.php">
+            <span class="icon"><i class="mdi mdi-square-edit-outline"></i></span>
+            <span class="menu-item-label">ข่าวประชาสัมพันธ์</span>
+          </a>
+        </li>
+        <li class="--set-active-forms-html">
+          <a href="forms.php">
+            <span class="icon"><i class="mdi mdi-square-edit-outline"></i></span>
+            <span class="menu-item-label">โปรโมชั่นสินค้า</span>
+          </a>
+        </li>
+        <li>
+          <a class="dropdown">
+            <span class="icon"><i class="mdi mdi-view-list"></i></span>
+            <span class="menu-item-label">รายงาน</span>
+            <span class="icon"><i class="mdi mdi-plus"></i></span>
+          </a>
+          <ul>
+            <li>
+              <a href="#void">
+                <span>การขายสินค้าประจำเดือน</span>
+              </a>
+            </li>
+            <li>
+              <a href="#void">
+                <span>การขายสินค้าประจำปี</span>
+              </a>
+            </li>
+            <li>
+              <a href="#void">
+                <span>การสินค้าขายดีประจำเดือน</span>
+              </a>
+            </li>
+            <li>
+              <a href="#void">
+                <span>การสินค้าขายดีประจำปี</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </aside>
 <section class="is-title-bar">
   <div class="flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0">
     <ul>
       <li>ผู้ดูแลระบบ</li>
-      <li>แผงควบคุม</li>
+      <li>สมาชิก</li>
     </ul>
     
   </div>
 </section>
-
-<section class="is-hero-bar">
-  <div class="flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0">
-    <h1 class="title">
-      แผงควบคุม
-    </h1>
-  </div>
-</section>
-
   <section class="section main-section">
-    <div class="grid gap-6 grid-cols-1 md:grid-cols-3 mb-6">
-      <div class="card">
-        <div class="card-content">
-          <div class="flex items-center justify-between">
-            <div class="widget-label">
-              <h3>
-                ลูกค้า
-              </h3>
-              <h1>
-                77
-              </h1>
-            </div>
-            <span class="icon widget-icon text-green-500"><i class="mdi mdi-account-multiple mdi-48px"></i></span>
-          </div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-content">
-          <div class="flex items-center justify-between">
-            <div class="widget-label">
-              <h3>
-                ขาย
-              </h3>
-              <h1>
-                $7,770
-              </h1>
-            </div>
-            <span class="icon widget-icon text-blue-500"><i class="mdi mdi-cart-outline mdi-48px"></i></span>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-content">
-          <div class="flex items-center justify-between">
-            <div class="widget-label">
-              <h3>
-                ผู้เข้าชม
-              </h3>
-              <h1>
-                256%
-              </h1>
-            </div>
-            <span class="icon widget-icon text-red-500"><i class="mdi mdi-finance mdi-48px"></i></span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-   
-   
-
+    
     <div class="card has-table">
       <header class="card-header">
         <p class="card-header-title">
           <span class="icon"><i class="mdi mdi-account-multiple"></i></span>
-          ลูกค้า
+          สมาชิก
         </p>
         <a href="#" class="card-header-icon">
           <span class="icon"><i class="mdi mdi-reload"></i></span>
@@ -357,28 +292,26 @@
         </div>
       </div>
     </div>
+
   </section>
 
-<footer class="footer">
-  <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0">
-    <div class="flex items-center justify-start space-x-3">
-      <div>
-        Copyrights © 
+  <footer class="footer">
+    <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0">
+      <div class="flex items-center justify-start space-x-3">
+        <div>
+          Copyrights © 
+        </div>
+        <script>
+          document.write(new Date().getFullYear());
+        </script>
+        <div>
+          <p><a href="../index.php" target="_blank">hedkorleawOTOP,</a> All Rights
+            Reserved.</p>
+        </div>
       </div>
-      <script>
-        document.write(new Date().getFullYear());
-      </script>
-      <div>
-        <p><a href="../index.php" target="_blank">hedkorleawOTOP,</a> All Rights
-          Reserved.</p>
-      </div>
+
     </div>
-
-
-   
-  </div>
 </footer>
-
 <div id="sample-modal" class="modal">
   <div class="modal-background --jb-modal-close"></div>
   <div class="modal-card">
@@ -398,9 +331,6 @@
 
 <!-- Scripts below are for demo only -->
 <script type="text/javascript" src="js/main.min.js?v=1628755089081"></script>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
-<script type="text/javascript" src="js/chart.sample.min.js"></script>
 
 
 <script>
@@ -422,5 +352,3 @@
 
 </body>
 </html>
-
-<?php } ?>
