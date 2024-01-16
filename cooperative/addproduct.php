@@ -51,7 +51,15 @@ if (!$_SESSION['userid']) {
       margin: 30px;
 
     }
-
+    input[type="date"] {
+      margin-left: 74px;
+      border-radius: 10px;
+      height: 40px;
+      border: 1px solid #ccc9c9;
+      width: 69%;
+      padding: 5px;
+      text-align: left;
+    }
     input[type="text"] {
       margin-left: 74px;
       border-radius: 10px;
@@ -214,6 +222,8 @@ if (!$_SESSION['userid']) {
           <input name="pro_img" type="file" id="pro_img" size="40" accept=".jpg, .jpeg, .png" style="margin-left: 40px;" />
         </div>
         <div class="group">
+        <label for="pro_name">วันที่ฝากขาย :</label>
+          <input name="pro_name" type="date" id="pro_name" style="margin-left: 40px; width: 68%;" />
           <label for="pro_name">ชื่อผู้ฝากขาย :</label>
           <input name="pro_name" type="text" id="pro_name" style="margin-left: 40px; width: 68%;" />
         </div>

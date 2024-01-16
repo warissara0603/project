@@ -89,6 +89,8 @@ if (!$_SESSION['userid']) {
                       <a href="report2.php" style="color: #000;">การขายสินค้าประจำปี</a>
                       <a href="report3.php" style="color: #000;">สินค้าขายดีประจำเดือน</a>
                       <a href="report4.php" style="color: #000;">สินค้าขายดีประจำปี</a>
+                      <a href="report5.php" style="color: #000;">ฝากขายสินค้า</a>
+
                     </div>
                   </div>
                 </li>

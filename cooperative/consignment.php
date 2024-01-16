@@ -172,6 +172,7 @@ if (!$_SESSION['userid']) {
                   <th class="bank-type">ประเภทสินค้า</th>
                   <th class="bank-price">ราคา</th>
                   <th class="bank-quantity">จำนวน</th>
+                  <th class="bank-quantity">วันที่</th>
                   <th class="bank-quantity">ชื่อผู้ฝากขาย</th>
                 </tr>
               </thead>
@@ -184,6 +185,7 @@ if (!$_SESSION['userid']) {
                   <td class="bank-type">ประเภทสินค้า</td>
                   <td class="bank-price">ราคา</td>
                   <td class="bank-quantity">จำนวน</td>
+                  <td class="bank-quantity">วันที่</td>
                   <td class="bank-quantity">ชื่อผู้ฝากขาย</td>
                 </tr>
               </tbody>

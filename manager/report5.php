@@ -41,6 +41,28 @@ if (!$_SESSION['userid']) {
   <link rel="stylesheet" href="css/index.css" />
   <!-- responsive -->
   <link rel="stylesheet" href="../assets/css/responsive.css" />
+  <style>
+    .single-latest-board {
+      padding: 50px;
+      height: 350px;
+    }
+
+    .single-latest-board label {
+      color: #BD2000;
+      font-size: 24px;
+      padding-left: 50px;
+      padding-top: 50px;
+    }
+
+    .single-latest-board select {
+      border: 1px solid #c4c4c4;
+      margin-left: 50px;
+      border-radius: 10px;
+      padding: 10px;
+      width: 77%;
+      height: 50px;
+    }
+  </style>
 </head>
 
 <body>
@@ -83,17 +105,11 @@ if (!$_SESSION['userid']) {
                 <li>
                   <div class="dropdown">
                     <a href="#">รายงาน</a>
-                    <div class="dropdown-content" style="
-                          padding: 10px;
-                          text-align: left;
-                          font-size: 14px;
-                          width: 230px;
-                          left: 0;
-                        ">
-                      <a href="report1.php" style="color: #000">การขายสินค้าประจำเดือน</a>
-                      <a href="report2.php" style="color: #000">การขายสินค้าประจำปี</a>
-                      <a href="report3.php" style="color: #000">สินค้าขายดีประจำเดือน</a>
-                      <a href="report4.php" style="color: #000">สินค้าขายดีประจำปี</a>
+                    <div class="dropdown-content" style="padding: 10px; text-align: left; font-size: 14px; width: 230px; left: 0;">
+                      <a href="report1.php" style="color: #000;">การขายสินค้าประจำเดือน</a>
+                      <a href="report2.php" style="color: #000;">การขายสินค้าประจำปี</a>
+                      <a href="report3.php" style="color: #000;">สินค้าขายดีประจำเดือน</a>
+                      <a href="report4.php" style="color: #000;">สินค้าขายดีประจำปี</a>
                       <a href="report5.php" style="color: #000;">ฝากขายสินค้า</a>
 
                     </div>
@@ -101,9 +117,9 @@ if (!$_SESSION['userid']) {
                 </li>
                 <li>
                   <div class="header-icons" style="font-size: 14px; margin-left: 25px">
+
                     <div class="dropdown" style="float: right">
-                      <a class="member"><i class="fas fa-user-friends"></i>
-                        <?php echo $_SESSION['username'] ?></a>
+                      <a class="member"><i class="fas fa-user-friends"></i> <?php echo $_SESSION['username'] ?></a>
                       <div class="dropdown-content">
                         <a href="../logout.php" style="color: black">ออกจากระบบ</a>
                       </div>
@@ -127,8 +143,7 @@ if (!$_SESSION['userid']) {
       <div class="row">
         <div class="col-lg-8 offset-lg-2 text-center">
           <div class="breadcrumb-text">
-            <p>สินค้าแฮนด์เมด และ ร้านค้าท้องถิ่น</p>
-            <h1>สินค้า</h1>
+            <h1>รายงาน</h1>
           </div>
         </div>
       </div>
@@ -136,77 +151,40 @@ if (!$_SESSION['userid']) {
   </div>
   <!-- end breadcrumb section -->
 
-  <!-- single product -->
-  <div class="single-product mt-150 mb-150">
+  <!-- latest board -->
+  <div class="latest-board mt-150 mb-150">
     <div class="container">
       <div class="row">
-        <div class="col-md-5">
-          <div class="single-product-img">
-            <img src="../assets/img/Products/สินค้า 1.jpg" alt="" />
-          </div>
-        </div>
-        <div class="col-md-7">
-          <div class="single-product-content">
-            <h3>ผ้าพันคอ(แม่สุริน)</h3>
-            <p class="single-product-pricing">฿120.00</p>
-            <p>ผ้าพันคอ(แม่สุริน)</p>
-            <div class="single-product-form">
-              <form action="index.php">
-                <input type="number" placeholder="0" />
-              </form>
-              <a class="cart-btn"><i class="fas fa-shopping-cart"></i> ใส่ตะกร้า</a>
+        <div class="col-lg-12 col-md-6">
+          <div class="single-latest-board">
+            <div class="board-text-box">
+              <h3 class="text-center">รายงานการฝากขายสินค้าของสหกรณ์ชุมชน</h3>
+              <label>เดือน</label>
+              <select name="cars" id="cars">
+                <option value="มกราคม">มกราคม</option>
+                <option value="กุมภาพันธ์">กุมภาพันธ์</option>
+                <option value="มีนาคม">มีนาคม</option>
+                <option value="เมษายน">เมษายน</option>
+                <option value="พฤษภาคม">พฤษภาคม</option>
+                <option value="มิถุนายน">มิถุนายน</option>
+                <option value="กรกฎาคม">กรกฎาคม</option>
+                <option value="สิงหาคม">สิงหาคม</option>
+                <option value="กันยายน">กันยายน</option>
+                <option value="ตุลาคม">ตุลาคม</option>
+                <option value="พฤศจิกายน">พฤศจิกายน</option>
+                <option value="ธันวาคม">ธันวาคม</option>
+              </select>
+            </div>
+            <div class="button text-center">
+              <button class="boxed-btn" type="submit">ออกรายงาน</button>
             </div>
           </div>
         </div>
+
       </div>
     </div>
   </div>
-  <!-- end single product -->
-  <!-- more products -->
-  <div class="more-products mb-150">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8 offset-lg-2 text-center">
-          <div class="section-title">
-            <h3><span class="orange-text">สินค้า</span>แนะนำ</h3>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-lg-4 col-md-6 text-center">
-          <div class="single-product-item">
-            <div class="product-image">
-              <a href="single-product.php"><img src="../assets/img/products/สินค้า 1.jpg" alt="" /></a>
-            </div>
-            <h4>ผ้าพันคอ(แม่สุริน)</h4>
-            <p class="product-price">฿120.00</p>
-            <a class="cart-btn"><i class="fas fa-shopping-cart"></i> ใส่ตะกร้า</a>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-6 text-center">
-          <div class="single-product-item">
-            <div class="product-image">
-              <a href="single-product.php"><img src="../assets/img/products/สินค้า 2.jpg" alt="" /></a>
-            </div>
-            <h4>ถั่วลายเสือบดผสมเมล็ดงาม้อน</h4>
-            <p class="product-price">฿100.00</p>
-            <a class="cart-btn"><i class="fas fa-shopping-cart"></i> ใส่ตะกร้า</a>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-6 offset-md-3 offset-lg-0 text-center">
-          <div class="single-product-item">
-            <div class="product-image">
-              <a href="single-product.php"><img src="../assets/img/products/สินค้า 3.jpg" alt="" /></a>
-            </div>
-            <h4>สบู่อะโวคาโด้ผสมวิตามินอีพลัส</h4>
-            <p class="product-price">฿150.00</p>
-            <a class="cart-btn"><i class="fas fa-shopping-cart"></i> ใส่ตะกร้า</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- end more products -->
+  <!-- end latest board -->
   <!-- footer -->
   <div class="footer-area">
     <div class="container">
@@ -215,16 +193,11 @@ if (!$_SESSION['userid']) {
           <div class="footer-box get-in-touch">
             <h2 class="widget-title">ติดต่อเรา</h2>
             <ul>
-              <li>
-                <i class="fas fa-route" style="width: 20px; padding-right: 30px"></i>ด้านหน้าโรงเรียน อบจ. บ้านจองคำ ถ. ขุนลุมประพาส <br />ต.จองคำ
-                อ. เมือง จ.แม่ฮ่องสอน
-              </li>
-              <li>
-                <i class="fas fa-envelope" style="width: 20px; padding-right: 30px"></i>hedkorleawOTOP@gmail.com
-              </li>
-              <li>
-                <i class="fas fa-phone" style="width: 20px; padding-right: 30px"></i>098 905 6624
-              </li>
+              <li><i class="	fas fa-route" style="width: 20px; padding-right: 30px;"></i>ด้านหน้าโรงเรียน อบจ. บ้านจองคำ
+                ถ. ขุนลุมประพาส <br>ต.จองคำ
+                อ. เมือง จ.แม่ฮ่องสอน</li>
+              <li><i class="fas fa-envelope" style="width: 20px; padding-right: 30px;"></i>hedkorleawOTOP@gmail.com</li>
+              <li><i class="fas fa-phone" style="width: 20px; padding-right: 30px;"></i>098 905 6624</li>
             </ul>
           </div>
         </div>
@@ -232,21 +205,11 @@ if (!$_SESSION['userid']) {
           <div class="footer-box pages">
             <h2 class="widget-title">หน้า</h2>
             <ul>
-              <li>
-                <i class="fas fa-angle-right" style="padding-right: 15px"></i><a href="index.php">หน้าหลัก</a>
-              </li>
-              <li>
-                <i class="fas fa-angle-right" style="padding-right: 15px"></i><a href="shop.php">ผลิตภัณฑ์</a>
-              </li>
-              <li>
-                <i class="fas fa-angle-right" style="padding-right: 15px"></i><a href="board.php">โปรโมชั่น</a>
-              </li>
-              <li>
-                <i class="fas fa-angle-right" style="padding-right: 15px"></i><a href="news.php">ประชาสัมพันธ์</a>
-              </li>
-              <li>
-                <i class="fas fa-angle-right" style="padding-right: 15px"></i><a href="contact.php">ติดต่อ</a>
-              </li>
+              <li><i class="fas fa-angle-right" style="padding-right: 15px;"></i><a href="index.php">หน้าหลัก</a></li>
+              <li><i class="fas fa-angle-right" style="padding-right: 15px;"></i><a href="shop.php">ผลิตภัณฑ์</a></li>
+              <li><i class="fas fa-angle-right" style="padding-right: 15px;"></i><a href="board.php">โปรโมชั่น</a></li>
+              <li><i class="fas fa-angle-right" style="padding-right: 15px;"></i><a href="news.php">ประชาสัมพันธ์</a></li>
+              <li><i class="fas fa-angle-right" style="padding-right: 15px;"></i><a href="contact.php">ติดต่อ</a></li>
             </ul>
           </div>
         </div>
@@ -262,7 +225,8 @@ if (!$_SESSION['userid']) {
         <div class="col-lg-6 col-md-12">
           <p>
             Copyrights © 2023 -
-            <a href="#">hedkorleawOTOP</a>, All Rights Reserved.
+            <a href="#">hedkorleawOTOP</a>, All Rights
+            Reserved.
           </p>
         </div>
         <div class="col-lg-6 text-right col-md-12">
@@ -275,7 +239,7 @@ if (!$_SESSION['userid']) {
                 <a href="https://www.youtube.com/@MHSPAO" target="_blank"><i class="fab fa-youtube"></i></a>
               </li>
               <li>
-                <a href="https://www.tiktok.com/@hedkorleaw2?is_from_webapp=1&sender_device=pc" target="_blank"><i class="fab fa-tumblr"></i></a>
+                <a href="https://www.tiktok.com/@hedkorleaw2?is_from_webapp=1&sender_device=pc" target="_blank"><i class="	fab fa-tumblr"></i></a>
               </li>
               <li>
                 <a href="https://shopee.co.th/hedkorleaw?utm_content=v7AhqvmwtRwAThK4mwBdnNgesBV" target="_blank"><i class="fas fa-shopping-bag"></i></a>
