@@ -1,9 +1,16 @@
 <?php
 session_start();
+require_once "../connectDB.php";
 
 if (!$_SESSION['userid']) {
   header("Location: index.php");
 } else {
+  $id = $_SESSION['userid'];
+  $query = "SELECT * FROM user WHERE user_id = '$id'";
+
+  $result = mysqli_query($conn, $query);
+  $row = mysqli_fetch_array($result);
+
 
 ?>
 <!DOCTYPE html>
@@ -87,10 +94,10 @@ if (!$_SESSION['userid']) {
                   <div class="header-icons" style="font-size: 14px; margin-left: 25px">
                     <a href="cart.php"><i class="fas fa-shopping-cart"></i></a>
                     <div class="dropdown" style="float:right;">
-                      <a class="member"><i class="	fas fa-user-friends"></i> <?php echo $_SESSION['username'] ?></a>
+                      <a class="member"><i class="	fas fa-user-friends"></i> <?php echo $row['name']; ?></a>
                       <div class="dropdown-content">
                         <a href="information.php" style="color: black;">ข้อมูลส่วนตัว</a>
-                        <a href="#" style="color: black;">ลบบัญชี</a>
+                        <a href="CRUDuser/deleteUser.php" style="color: black;">ลบบัญชี</a>
                         <a href="../logout.php" style="color: black;">ออกจากระบบ</a>
                       </div>
                     </div>
@@ -122,7 +129,7 @@ if (!$_SESSION['userid']) {
   </div>
   <!-- end breadcrumb section -->
 
-  <!-- products -->
+  <!-- information -->
   <div class="product-section mt-150 mb-150">
     <div class="container">
       <div class="information">
@@ -131,26 +138,22 @@ if (!$_SESSION['userid']) {
             <div class="information-header">
               <h3 style="margin-bottom: 20px;text-align: center;">ข้อมูลส่วนตัว</h3>
             </div>
-            <form class="information-form">
-              <div class="form-group">
+            <form class="information-form" action="CRUDuser/updateUser.php" method="post">
+            <div class="form-group">
                 <label for="name">ชื่อ - นามสกุล</label>
-                <input type="text" class="form-control" id="name" placeholder="กรุณาใส่ชื่อ - นามสกุล" />
+                <input type="text" class="form-control" name="name" placeholder="กรุณาใส่ชื่อ - นามสกุล" value="<?php echo $row['name']; ?>"  />
               </div>
               <div class="form-group">
                 <label for="username">ชื่อผู้ใช้</label>
-                <input type="text" class="form-control" id="username" placeholder="กรุณาใส่ชื่อผู้ใช้" />
-              </div>
-              <div class="form-group">
-                <label for="password">รหัสผ่าน</label>
-                <input type="password" class="form-control" id="username" placeholder="กรุณาใส่รหัสผ่าน" />
+                <input type="text" class="form-control" name="username" placeholder="กรุณาใส่ชื่อผู้ใช้" value="<?php echo $row['username']; ?>"  />
               </div>
               <div class="form-group">
                 <label for="email">อีเมล์</label>
-                <input type="email" class="form-control" id="email" placeholder="กรุณาใส่อีเมล์" />
+                <input type="email" class="form-control" name="email" placeholder="กรุณาใส่อีเมล์" value="<?php echo $row['email']; ?>"  />
               </div>
               <div class="form-group">
                 <label for="number">เบอร์โทรศัพท์</label>
-                <input type="text" class="form-control" id="number" maxlength="10" size="10" placeholder="กรุณาใส่เบอร์โทรศัพท์" />
+                <input type="text" class="form-control" name="phone" maxlength="10" size="10" placeholder="กรุณาใส่เบอร์โทรศัพท์" value="<?php echo $row['phone']; ?>"  />
               </div>
               <div class="form-group">
                 <label for="tel">ที่อยู่</label>
@@ -160,21 +163,21 @@ if (!$_SESSION['userid']) {
                       height: 200px;
                       border: 2px solid #eee;
                       border-radius: 15px;
-                    "></textarea>
+                    " ><?php echo $row['address']; ?></textarea>
+              </div>
+              <br />
+              <div class="button text-center">
+                <button type="submit" name="submitUpdateUser">แก้ไข</button>
+                <a class="cancel" href="information.php"><button type="button">ยกเลิก</button></a>
               </div>
             </form>
-            <br />
-            <div class="button text-center">
-              <button type="submit">แก้ไข</button>
-              <a class="cancel" href="information.php"><button type="submit">ยกเลิก</button></a>
-            </div>
           </div>
         </div>
       </div>
 
     </div>
   </div>
-  <!-- end products -->
+  <!-- end information -->
   <!-- footer -->
   <div class="footer-area">
     <div class="container">

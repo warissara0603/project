@@ -133,7 +133,7 @@
               </a>
             </li>
             <li>
-              <a href="#">
+              <a href="membertables.php">
                 <span>สมาชิก</span>
               </a>
             </li>
@@ -146,40 +146,12 @@
           </a>
         </li>
         <li class="--set-active-forms-html">
-          <a href="forms.php">
+          <a href="board.php">
             <span class="icon"><i class="mdi mdi-square-edit-outline"></i></span>
             <span class="menu-item-label">โปรโมชั่นสินค้า</span>
           </a>
         </li>
-        <li>
-          <a class="dropdown">
-            <span class="icon"><i class="mdi mdi-view-list"></i></span>
-            <span class="menu-item-label">รายงาน</span>
-            <span class="icon"><i class="mdi mdi-plus"></i></span>
-          </a>
-          <ul>
-            <li>
-              <a href="#void">
-                <span>การขายสินค้าประจำเดือน</span>
-              </a>
-            </li>
-            <li>
-              <a href="#void">
-                <span>การขายสินค้าประจำปี</span>
-              </a>
-            </li>
-            <li>
-              <a href="#void">
-                <span>การสินค้าขายดีประจำเดือน</span>
-              </a>
-            </li>
-            <li>
-              <a href="#void">
-                <span>การสินค้าขายดีประจำปี</span>
-              </a>
-            </li>
-          </ul>
-        </li>
+       
       </ul>
     </div>
   </aside>
@@ -230,7 +202,7 @@
             <td class="actions-cell">
               <div class="buttons right nowrap">
                 <button class="button small green --jb-modal"  data-target="sample-modal-2" type="button">
-                  <a href="#"><span class="icon"><i class="mdi mdi-eye"></i></span></a>
+                <a href="profile.php"><span class="icon"><i class="mdi mdi-eye"></i></span></a>
                 </button>
                 <button class="button small red --jb-modal" data-target="sample-modal" type="button">
                   <span class="icon"><i class="mdi mdi-trash-can"></i></span>
@@ -250,7 +222,7 @@
             <td class="actions-cell">
               <div class="buttons right nowrap">
                 <button class="button small green --jb-modal"  data-target="sample-modal-2" type="button">
-                  <a href="#"><span class="icon"><i class="mdi mdi-eye"></i></span></a>
+                <a href="profile.php"><span class="icon"><i class="mdi mdi-eye"></i></span></a>
                 </button>
                 <button class="button small red --jb-modal" data-target="sample-modal" type="button">
                   <span class="icon"><i class="mdi mdi-trash-can"></i></span>
@@ -270,7 +242,7 @@
             <td class="actions-cell">
               <div class="buttons right nowrap">
                 <button class="button small green --jb-modal" type="button">
-                  <a href="#"><span class="icon"><i class="mdi mdi-eye"></i></span></a>
+                <a href="profile.php"><span class="icon"><i class="mdi mdi-eye"></i></span></a>
                 </button>
                 <button class="button small red --jb-modal" data-target="sample-modal" type="button">
                   <span class="icon"><i class="mdi mdi-trash-can"></i></span>

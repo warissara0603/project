@@ -60,7 +60,15 @@ if (!$_SESSION['userid']) {
       padding: 5px;
       text-align: left;
     }
-
+    input[type="date"] {
+      margin-left: 74px;
+      border-radius: 10px;
+      height: 40px;
+      border: 1px solid #ccc9c9;
+      width: 69%;
+      padding: 5px;
+      text-align: left;
+    }
     input[type="number"] {
 
       border-radius: 10px;
@@ -183,48 +191,50 @@ if (!$_SESSION['userid']) {
   <h3 style="margin-top: 100px; text-align: center;">ฝากขายสินค้า</h3>
   <div class="checkout-section mt-50 mb-150">
     <div class="container" style="width: 70%;">
-      <form action="" method="post" enctype="multipart/form-data" name="Add_Product" id="Add_Product">
+      <form action="CRUDemp/insert_product.php" method="post" enctype="multipart/form-data">
         <div class="group">
-          <label for="pro_name2">ชื่อสินค้า :</label>
-          <input name="pro_name" type="text" id="pro_name2" />
+          <label for="name_product">ชื่อสินค้า :</label>
+          <input name="name_product" type="text" required />
         </div>
         <div class="group">
-          <label for="pro_detail">รายละเอียดสินค้า : </label>
-          <textarea name="pro_detail" id="pro_detail" cols="72" rows="3"></textarea>
+          <label for="detail">รายละเอียดสินค้า : </label>
+          <textarea name="detail" cols="72" rows="3" required></textarea>
         </div>
         <div class="group">
-          <label for=""> ประเภทสินค้า :</label>
-          <select name="type_id" id="type_id">
+          <label for="type_pro"> ประเภทสินค้า :</label>
+          <select name="type_pro" id="type_pro" required>
             <option value="">กรุณาเลือกประเภท</option>
-            <option value="1">อาหารและเครื่องดื่ม</option>
-            <option value="2">เสื้อผ้าและเครื่องแต่งกาย</option>
-            <option value="3">เครื่องประดับ</option>
-            <option value="4">เครื่องสำอาง </option>
-            <option value="5">สิ่งประดิษฐ</option>
-            <option value="6">สมุนไพร</option>
-            </option>
+            <option value="อาหารและเครื่องดื่ม">อาหารและเครื่องดื่ม</option>
+            <option value="เสื้อผ้าและเครื่องแต่งกาย">เสื้อผ้าและเครื่องแต่งกาย</option>
+            <option value="เครื่องประดับ">เครื่องประดับ</option>
+            <option value="เครื่องสำอาง">เครื่องสำอาง </option>
+            <option value="สิ่งประดิษฐ">สิ่งประดิษฐ</option>
+            <option value="สมุนไพร">สมุนไพร</option>
+            </option> 
           </select>
         </div>
 
         <div class="group">
-          <label for="number">ราคา : </label>
-          <input type="number" name="pro_price_cost" min="0" id="pro_price_cost" style="margin-left: 104px;" />
-          <label for="number">จำนวน : </label>
-          <input type="number" name="pro_price_sale" min="0" id="pro_price_sale" style="margin-left: 39px;" />
+          <label for="price">ราคา : </label>
+          <input type="number" name="price" min="0" style="margin-left: 104px;" required/>
+          <label for="amount">จำนวน : </label>
+          <input type="number" name="amount" min="0" style="margin-left: 39px;" required/>
         </div>
         <div class="group">
-          <label for="pro_img">รูปภาพสินค้า : </label>
-          <input name="pro_img" type="file" id="pro_img" size="40" accept=".jpg, .jpeg, .png" style="margin-left: 40px;" />
+          <label for="pic_product">รูปภาพสินค้า : </label>
+          <input name="pic_product" type="file" size="40" accept=".jpg, .jpeg, .png" style="margin-left: 40px;" required/>
         </div>
         <div class="group">
-          <label for="pro_name">ชื่อผู้ฝากขาย :</label>
-          <input name="pro_name" type="text" id="pro_name" style="margin-left: 40px; width: 68%;" />
+        <label for="dateadd">วันที่ฝากขาย :</label>
+          <input name="dateadd" type="date" style="margin-left: 40px; width: 68%;" required/>
+          <label for="name">ชื่อผู้ฝากขาย :</label>
+          <input name="name" type="text" style="margin-left: 40px; width: 68%;" required />
+        </div>
+        <div class="button">
+          <a class="add"><button type="submit" name="submitaddproduct">เพิ่มสินค้า</button></a>
+          <a class="cancel" href="consignment.php"><button type="button">ยกเลิก</button></a>
         </div>
       </form>
-      <div class="button">
-        <a class="add" href="consignment.php"><button type="submit">เพิ่มสินค้า</button></a>
-        <a class="cancel" href="consignment.php"><button type="submit">ยกเลิก</button></a>
-      </div>
     </div>
   </div>
   <!-- end check out section -->

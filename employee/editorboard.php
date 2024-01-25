@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once "../connectDB.php";
 
 if (!$_SESSION['userid']) {
   header("Location: index.php");
@@ -162,25 +163,44 @@ if (!$_SESSION['userid']) {
   <h3 style="margin-top: 100px; text-align: center;">แก้ไขโปรโมชั่น</h3>
   <div class="checkout-section mt-50 mb-150">
     <div class="container" style="width: 70%;">
-      <form action="" method="post" enctype="multipart/form-data" name="Add_Product" id="Add_Product">
+
+    <?php
+      if(isset($_GET['id'])){
+        $id = $_GET['id'];
+      }else{
+        $id = "";
+      }
+        $sql = "SELECT * FROM `promotion` WHERE promotion_id = '$id'";
+        $result = mysqli_query($conn,$sql);
+        $row = mysqli_fetch_array($result);
+        ?>
+
+      <form action="CRUDemp/update_board.php" method="post" enctype="multipart/form-data">
+      <input name="promotion_id" type="hidden" value="<?php echo $row['promotion_id']?>" />
         <div class="group">
-          <label for="pro_name2">ชื่อโปรโมชั่น :</label>
-          <input name="pro_name" type="text" id="pro_name2" />
+          <label for="title">ชื่อโปรโมชั่น :</label>
+          <input name="title" type="text" value="<?php echo $row['title']?>"/>
         </div>
         <div class="group">
-          <label for="pro_detail">รายละเอียดโปรโมชั่น : </label>
-          <textarea name="pro_detail" id="pro_detail" cols="72" rows="5"></textarea>
+          <label for="detail">รายละเอียดโปรโมชั่น : </label>
+          <textarea name="detail" cols="72" rows="5"><?php echo $row['detail']?></textarea>
         </div>
         <div class="group">
-          <label for="pro_img">รูปภาพโปรโมชั่น : </label>
-          <input name="pro_img" type="file" id="pro_img" size="40" accept=".jpg, .jpeg, .png" style="margin-left: 40px;" />
+          <label for="pic_promotion">รูปภาพโปรโมชั่น : </label>
+          <input name="pic_promotion" type="file" size="40" accept=".jpg, .jpeg, .png" style="margin-left: 40px;" />
+          <br>
+          <label>รูปภาพโปรโมชั่นเดิม : </label>
+          <img src="../assets/img/promotion/<?php echo $row['pic_promotion']?>"
+          style="background-position: center;
+                 background-size: cover;
+                 height: 150px;
+                 width: 400px;">
         </div>
-      </form>
-      <div class="button">
-        <a class="add" href="board.php"><button type="submit">แก้ไข</button></a>
-        <a class="cancel" href="board.php"><button type="submit">ยกเลิก</button></a>
-        <a class="cancel" href="board.php"><button type="submit">ลบ</button></a>
+        <div class="button">
+        <button type="submit" name="submitupdatepromotion">แก้ไข</button>
+        <a class="cancel" href="board.php"><button type="button">ยกเลิก</button></a>
       </div>
+      </form>
     </div>
   </div>
   <!-- end check out section -->

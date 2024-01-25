@@ -69,6 +69,14 @@ if (!$_SESSION['userid']) {
       box-shadow: 0 7px 9px 0 rgba(0, 0, 0, 0.24), 0 5px 20px 0 rgba(0, 0, 0, 0.19);
 
     }
+    input[type="search"] {
+        border-radius: 10px;
+        height: 40px;
+        border: 1px solid #ccc9c9;
+        width: 25%;
+        padding: 10px;
+        text-align: left;
+      }
   </style>
 </head>
 
@@ -156,8 +164,13 @@ if (!$_SESSION['userid']) {
 
   <!-- check out section -->
   <h3 style="margin-top: 100px; text-align: center;">รายการสั่งซื้อทั้งหมด</h3>
-  <div class="checkout-section mt-70 mb-150">
+  <div class="checkout-section mt-75 mb-150">
     <div class="container">
+    <div class="group" style="margin-top: 40px;">
+          <input type="search" id="gsearch" name="gsearch" placeholder="ค้นหา">
+          <span><a href="#"><button class="order" style="width: 100px;">ค้นหา</button></a></span>
+          
+        </div>
       <div class="row">
         <div class="card-body">
           <div class="cart-table-wrap">

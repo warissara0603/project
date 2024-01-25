@@ -160,24 +160,24 @@ if (!$_SESSION['userid']) {
   <h3 style="margin-top: 100px; text-align: center;">เพิ่มโปรโมชั่น</h3>
   <div class="checkout-section mt-50 mb-150">
     <div class="container" style="width: 70%;">
-      <form action="" method="post" enctype="multipart/form-data" name="Add_Product" id="Add_Product">
+      <form action="CRUDemp/insert_board.php" method="post" enctype="multipart/form-data">
         <div class="group">
-          <label for="pro_name2">ชื่อโปรโมชั่น :</label>
-          <input name="pro_name" type="text" id="pro_name2" />
+          <label for="title">ชื่อโปรโมชั่น :</label>
+          <input name="title" type="text" required/>
         </div>
         <div class="group">
-          <label for="pro_detail">รายละเอียดโปรโมชั่น : </label>
-          <textarea name="pro_detail" id="pro_detail" cols="72" rows="5"></textarea>
+          <label for="detail">รายละเอียดโปรโมชั่น : </label>
+          <textarea name="detail" cols="72" rows="5" required></textarea>
         </div>
         <div class="group">
-          <label for="pro_img">รูปภาพโปรโมชั่น : </label>
-          <input name="pro_img" type="file" id="pro_img" size="40" accept=".jpg, .jpeg, .png" style="margin-left: 40px;" />
+          <label for="pic_promotion">รูปภาพโปรโมชั่น : </label>
+          <input name="pic_promotion" type="file" size="40" accept=".jpg, .jpeg, .png" style="margin-left: 40px;" required/>
         </div>
-      </form>
-      <div class="button">
-        <a class="add" href="board.php"><button type="submit">เพิ่มโปรโมชั่น</button></a>
-        <a class="cancel" href="board.php"><button type="submit">ยกเลิก</button></a>
+        <div class="button">
+        <a class="add"><button type="submit" name="submitaddpromotion">เพิ่มโปรโมชั่น</button></a>
+        <a class="cancel" href="board.php"><button type="button">ยกเลิก</button></a>
       </div>
+      </form>
     </div>
   </div>
   <!-- end check out section -->

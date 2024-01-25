@@ -2,6 +2,8 @@
 <?php
 session_start();
 
+require_once "../connectDB.php";
+
 if (!$_SESSION['userid']) {
   header("Location: index.php");
 } else {
@@ -161,25 +163,44 @@ if (!$_SESSION['userid']) {
   <h3 style="margin-top: 100px; text-align: center;">แก้ไขประชาสัมพันธ์</h3>
   <div class="checkout-section mt-50 mb-150">
     <div class="container" style="width: 70%;">
-      <form action="" method="post" enctype="multipart/form-data" name="Add_Product" id="Add_Product">
+
+    <?php
+      if(isset($_GET['id'])){
+        $id = $_GET['id'];
+      }else{
+        $id = "";
+      }
+        $sql = "SELECT * FROM `new` WHERE new_id = '$id'";
+        $result = mysqli_query($conn,$sql);
+        $row = mysqli_fetch_array($result);
+    ?>
+
+      <form action="CRUDemp/update_news.php" method="post" enctype="multipart/form-data">
+      <input name="new_id" type="hidden" value="<?php echo $row['new_id']?>" />
         <div class="group">
-          <label for="pro_name2">ชื่อประชาสัมพันธ์ :</label>
-          <input name="pro_name" type="text" id="pro_name2" />
+          <label for="title">ชื่อประชาสัมพันธ์ :</label>
+          <input name="title" type="text" value="<?php echo $row['title']?>"/>
         </div>
         <div class="group">
-          <label for="pro_detail">รายละเอียดประชาสัมพันธ์ : </label>
-          <textarea name="pro_detail" id="pro_detail" cols="68" rows="5"></textarea>
+          <label for="detail">รายละเอียดประชาสัมพันธ์ : </label>
+          <textarea name="detail" cols="68" rows="5"><?php echo $row['detail']?></textarea>
         </div>
         <div class="group">
-          <label for="pro_img">รูปภาพประชาสัมพันธ์ : </label>
-          <input name="pro_img" type="file" id="pro_img" size="40" accept=".jpg, .jpeg, .png" style="margin-left: 40px;" />
+          <label for="pic_new">รูปภาพประชาสัมพันธ์ : </label>
+          <input name="pic_new" type="file" size="40" accept=".jpg, .jpeg, .png" style="margin-left: 40px;" />
+          <br>
+          <label>รูปภาพข่าวประชาสัมพันธ์เดิม : </label>
+          <img src="../assets/img/latest-news/<?php echo $row['pic_new']?>"
+          style="background-position: center;
+                 background-size: cover;
+                 height: 200px;
+                 width: 300px;">
+        </div>
+        <div class="button">
+          <button type="submit" name="submitupdatenews">แก้ไข</button>
+          <a class="cancel" href="news.php"><button type="submit">ยกเลิก</button></a>
         </div>
       </form>
-      <div class="button">
-        <a class="add" href="news.php"><button type="submit">แก้ไข</button></a>
-        <a class="cancel" href="news.php"><button type="submit">ยกเลิก</button></a>
-        <a class="cancel" href="news.php"><button type="submit">ลบ</button></a>
-      </div>
     </div>
   </div>
   <!-- end check out section -->

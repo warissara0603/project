@@ -3,7 +3,7 @@
 *,
 ::after,
 ::before {
-    box-sizing: border-box
+    box-sizing: border-box;
 }
 
 html {
@@ -22,7 +22,7 @@ body {
 }
 
 body {
-    font-family: "Noto Sans Thai";, 'Apple Color Emoji', 'Segoe UI Emoji'
+    font-family: "Noto Sans Thai", 'Apple Color Emoji', 'Segoe UI Emoji'
 }
 
 hr {
@@ -244,7 +244,7 @@ object,
 svg,
 video {
     display: block;
-    vertical-align: middle
+    vertical-align: middle;
 }
 
 img,

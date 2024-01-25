@@ -159,24 +159,24 @@ if (!$_SESSION['userid']) {
   <h3 style="margin-top: 100px; text-align: center;">เพิ่มประชาสัมพันธ์</h3>
   <div class="checkout-section mt-50 mb-150">
     <div class="container" style="width: 70%;">
-      <form action="" method="post" enctype="multipart/form-data" name="Add_Product" id="Add_Product">
+      <form action="CRUDemp/insert_news.php" method="post" enctype="multipart/form-data">
         <div class="group">
-          <label for="pro_name2">ชื่อประชาสัมพันธ์ :</label>
-          <input name="pro_name" type="text" id="pro_name2" />
+          <label for="title">ชื่อประชาสัมพันธ์ :</label>
+          <input name="title" type="text" required/>
         </div>
         <div class="group">
-          <label for="pro_detail">รายละเอียดประชาสัมพันธ์ : </label>
-          <textarea name="pro_detail" id="pro_detail" cols="68" rows="5"></textarea>
+          <label for="detail">รายละเอียดประชาสัมพันธ์ : </label>
+          <textarea name="detail" cols="68" rows="5" required></textarea>
         </div>
         <div class="group">
-          <label for="pro_img">รูปภาพประชาสัมพันธ์ : </label>
-          <input name="pro_img" type="file" id="pro_img" size="40" accept=".jpg, .jpeg, .png" style="margin-left: 40px;" />
+          <label for="pic_new">รูปภาพประชาสัมพันธ์ : </label>
+          <input name="pic_new" type="file" size="40" accept=".jpg, .jpeg, .png" style="margin-left: 40px;" />
+        </div>
+        <div class="button">
+          <a class="add"><button type="submit" name="submitaddnews">เพิ่มประชาสัมพันธ์</button></a>
+          <a class="cancel" href="news.php"><button type="button">ยกเลิก</button></a>
         </div>
       </form>
-      <div class="button">
-        <a class="add" href="news.php"><button type="submit">เพิ่มประชาสัมพันธ์</button></a>
-        <a class="cancel" href="news.php"><button type="submit">ยกเลิก</button></a>
-      </div>
     </div>
   </div>
   <!-- end check out section -->

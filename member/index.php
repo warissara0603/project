@@ -1,9 +1,15 @@
 <?php
 session_start();
+require_once "../connectDB.php";
 
 if (!$_SESSION['userid']) {
   header("Location: index.php");
 } else {
+  $id = $_SESSION['userid'];
+  $query = "SELECT * FROM user WHERE user_id = '$id'";
+
+  $result = mysqli_query($conn, $query);
+  $row = mysqli_fetch_array($result);
 
 ?>
 
@@ -88,10 +94,10 @@ if (!$_SESSION['userid']) {
                     <div class="header-icons" style="font-size: 14px; margin-left: 25px">
                       <a href="cart.php"><i class="fas fa-shopping-cart"></i></a>
                       <div class="dropdown" style="float:right;">
-                        <a class="member"><i class="	fas fa-user-friends"></i> <?php echo $_SESSION['username'] ?></a>
+                        <a class="member"><i class="	fas fa-user-friends"></i> <?php echo $row['name']; ?></a>
                         <div class="dropdown-content">
                           <a href="information.php" style="color: black;">ข้อมูลส่วนตัว</a>
-                          <a href="#" style="color: black;">ลบบัญชี</a>
+                          <a href="CRUDuser/deleteUser.php" style="color: black;">ลบบัญชี</a>
                           <a href="../logout.php" style="color: black;">ออกจากระบบ</a>
                         </div>
                       </div>

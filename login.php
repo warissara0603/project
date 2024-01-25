@@ -10,7 +10,7 @@ if(isset($_POST['submitlogin'])){
 
     $query = "SELECT * FROM user WHERE username = '$username' AND password = '$passwordenc'";
 
-    $result = mysqli_query($connectdb, $query);
+    $result = mysqli_query($conn, $query);
 
     if(mysqli_num_rows($result) == 1){
       $row = mysqli_fetch_array($result);
@@ -39,7 +39,8 @@ if(isset($_POST['submitlogin'])){
         header("Location: /project/manager/index.php");
       }
     } else {
-      echo "<script>alert('ผู้ใช้งาน หรือ รหัสผ่านไม่ถูกต้อง');</script>";
+      echo '<script>alert("ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง"); window.location="/project/index.php";</script>'; 
+      // header("Location: /project/index.php");
     } 
   }
 ?>

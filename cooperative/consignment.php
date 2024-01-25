@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once "../connectDB.php";
 
 if (!$_SESSION['userid']) {
   header("Location: index.php");
@@ -64,7 +65,7 @@ if (!$_SESSION['userid']) {
     }
 
     .consignment {
-      margin-left: 81%;
+
       border-radius: 10px;
     }
 
@@ -72,6 +73,14 @@ if (!$_SESSION['userid']) {
       box-shadow: 0 7px 9px 0 rgba(0, 0, 0, 0.24), 0 5px 20px 0 rgba(0, 0, 0, 0.19);
 
     }
+    input[type="search"] {
+        border-radius: 10px;
+        height: 40px;
+        border: 1px solid #ccc9c9;
+        width: 25%;
+        padding: 10px;
+        text-align: left;
+      }
   </style>
 </head>
 
@@ -158,7 +167,11 @@ if (!$_SESSION['userid']) {
   <h3 style="margin-top: 100px; text-align: center;">รายการสินค้าทั้งหมด</h3>
   <div class="checkout-section mt-50 mb-150">
     <div class="container">
-      <a href="addproduct.php"><button class="consignment">ฝากขายสินค้า</button></a>
+    <div class="group" >
+          <input type="search" id="gsearch" name="gsearch" placeholder="ค้นหา">
+          <span><a href="#"><button class="consignment" style="width: 100px;">ค้นหา</button></a></span>
+          <span><a href="addproduct.php"><button class="consignment" style="float: inline-end;">ฝากขายสินค้า</button></a></span>
+        </div>
       <div class="row">
         <div class="card-body">
           <div class="cart-table-wrap">
@@ -176,19 +189,31 @@ if (!$_SESSION['userid']) {
                   <th class="bank-quantity">ชื่อผู้ฝากขาย</th>
                 </tr>
               </thead>
+              <?php
+                  if(isset($_GET['id'])){
+                    $id = $_GET['id'];
+                  }else{
+                    $id = "";
+                  }
+                  
+                  $sql = "SELECT * FROM `product`";
+                  $result = mysqli_query($conn,$sql);
+                  while($row = mysqli_fetch_array($result)){
+                ?>
               <tbody style="height: 50px">
                 <tr class="bank-body-row text-center">
-                  <td class="bank-number">1</td>
-                  <td class="bank-picture"><img src="../assets/img/products/สินค้า 1.jpg" alt=""></td>
-                  <td class="bank-name">ชื่อสินค้า</td>
-                  <td class="bank-details">รายละเอียดสินค้า</td>
-                  <td class="bank-type">ประเภทสินค้า</td>
-                  <td class="bank-price">ราคา</td>
-                  <td class="bank-quantity">จำนวน</td>
-                  <td class="bank-quantity">วันที่</td>
-                  <td class="bank-quantity">ชื่อผู้ฝากขาย</td>
+                    <td class="bank-number"><?php echo $row['product_id']?></td>
+                    <td class="bank-picture"><img src="../assets/img/products/<?php echo $row['pic_product']?>" height="auto"></td>
+                    <td class="bank-name"><?php echo $row['name_product']?></td>
+                    <td class="bank-details"><?php echo $row['detail']?></td>
+                    <td class="bank-type"><?php echo $row['type_pro']?></td>
+                    <td class="bank-price"><?php echo $row['price']?></td>
+                    <td class="bank-quantity"><?php echo $row['amount']?></td>
+                    <td class="bank-quantity"><?php echo $row['dateadd']?></td>
+                    <td class="bank-quantity"><?php echo $row['name']?></td>
                 </tr>
               </tbody>
+              <?php } ?>
             </table>
           </div>
         </div>

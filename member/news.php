@@ -1,9 +1,15 @@
 <?php
 session_start();
+require_once "../connectDB.php";
 
 if (!$_SESSION['userid']) {
   header("Location: index.php");
 } else {
+  $id = $_SESSION['userid'];
+  $query = "SELECT * FROM user WHERE user_id = '$id'";
+
+  $result = mysqli_query($conn, $query);
+  $row = mysqli_fetch_array($result);
 
 ?>
 <!DOCTYPE html>
@@ -87,10 +93,10 @@ if (!$_SESSION['userid']) {
 									<div class="header-icons" style="font-size: 14px; margin-left: 25px">
 										<a href="cart.php"><i class="fas fa-shopping-cart"></i></a>
 										<div class="dropdown" style="float:right;">
-											<a class="member"><i class="	fas fa-user-friends"></i> <?php echo $_SESSION['username'] ?></a>
+											<a class="member"><i class="	fas fa-user-friends"></i> <?php echo $row['name']; ?></a>
 											<div class="dropdown-content">
 												<a href="information.php" style="color: black;">ข้อมูลส่วนตัว</a>
-												<a href="#" style="color: black;">ลบบัญชี</a>
+												<a href="CRUDuser/deleteUser.php" style="color: black;">ลบบัญชี</a>
 												<a href="../logout.php" style="color: black;">ออกจากระบบ</a>
 											</div>
 										</div>
@@ -126,64 +132,45 @@ if (!$_SESSION['userid']) {
 	<div class="latest-news mt-150 mb-150">
 		<div class="container">
 			<div class="row">
+			<?php
+				if(isset($_GET['id'])){
+					$id = $_GET['id'];
+				}else{
+					$id = "";
+				}
+								
+				$sql = "SELECT * FROM `new`";
+				$result = mysqli_query($conn,$sql);
+				while($row = mysqli_fetch_array($result)){
+      		?>
 				<div class="col-lg-4 col-md-6">
 					<div class="single-latest-news">
 						<a href="single-news.php">
-							<div class="latest-news-bg news-bg-1"></div>
+						<img src="../assets/img/latest-news/<?php echo $row['pic_new']?>"
+                   				 style="height: 300px;
+										width: 100%;
+										background-size: cover;
+										background-position: center;
+										border-radius: 10px;
+										background-color: #ddd;
+										border-bottom-right-radius: 0;
+										border-bottom-left-radius: 0;">
 						</a>
 						<div class="news-text-box">
 							<h3>
-								<a href="single-news.php">จัดกิจกรรม Live สด เกี่ยวกับสินค้าชุมชนจังหวัดแม่ฮ่องสอน พบกับ สาวมากความสามารถคุณลูกพีช เจ้าของช่อง " ลูกพีชChanel "
+								<a href="single-news.php"><?php echo $row['title']?>
 								</a>
 							</h3>
 							<p class="excerpt">
-								พรุ่งนี้เวลา 19.00 น. ศูนย์พัฒนาและแสดงสินค้าชุมชนจังหวัดแม่ฮ่องสอน จัดกิจกรรม Live สด เกี่ยวกับสินค้าชุมชนจังหวัดแม่ฮ่องสอนพบกับ สาวมากความสามารถคุณลูกพีช เจ้าของช่อง " ลูกพีชChanel "
+							<?php echo $row['detail']?>
 
 							</p>
+							<br>
 							<a href="single-news.php" class="read-more-btn">ดูเพิ่มเติม <i class="fas fa-angle-right"></i></a>
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-4 col-md-6">
-					<div class="single-latest-news">
-						<a href="single-news.php">
-							<div class="latest-news-bg news-bg-2"></div>
-						</a>
-						<div class="news-text-box">
-							<h3>
-								<a href="single-news.php">
-									ขอเชิญชวนประชาชนร่วมชิม & ช้อป ในงาน “สินค้าดี BCG Local Plus รักษ์โลก รักแม่ฮ่องสอน”</a>
-							</h3>
-							<p class="excerpt">
-								🗓 ระหว่างวันที่ 21-25 ธันวาคม 2566 <br>
-								⏰ ตั้งแต่เวลา 08.00 - 16.30 น. <br>
-								📍 ณ ศูนย์พัฒนาและแสดงสินค้าชุมชนจังหวัดแม่ฮ่องสอน“เฮ็ดก้อเหลียว”
-								อำเภอเมืองแม่ฮ่องสอน จังหวัดแม่ฮ่องสอน </p>
-							<a href="single-news.php" class="read-more-btn">ดูเพิ่มเติม <i class="fas fa-angle-right"></i></a>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6">
-					<div class="single-latest-news">
-						<a href="single-news.php">
-							<div class="latest-news-bg news-bg-3"></div>
-						</a>
-						<div class="news-text-box">
-							<h3>
-								<a href="single-news.php">เปิดเมิงไต ชิมอาหารไทใหญ่ ชมสินค้าท้องถิ่น ครั้งที่ 16 ชวน ช้อป ชิม</a>
-							</h3>
-							<p class="excerpt">
-								🗓 ระหว่างวันที่ 6 - 10 ธันวาคม 2566 <br>
-								⏰ ตั้งแต่เวลา 18.00 - 21.00 น.<br>
-								📍 ณ ศูนย์ไทใหญ่ศึกษา อำเภอเมือง จังหวัดแม่ฮ่องสอน
-								เชิญชวนนักท่องเที่ยวหรือชาวแม่ฮ่องสอนทุกท่านมาชม
-								ผลิตจากฝีมือคนแม่ฮ่องสอน ได้นะคะ💕
-							</p>
-							<a href="single-news.php" class="read-more-btn">ดูเพิ่มเติม <i class="fas fa-angle-right"></i></a>
-						</div>
-					</div>
-				</div>
-
+				<?php } ?>
 			</div>
 
 			<div class="row">

@@ -1,6 +1,8 @@
 <?php
 session_start();
 
+require_once "../connectDB.php";
+
 if (!$_SESSION['userid']) {
   header("Location: index.php");
 } else {
@@ -135,33 +137,55 @@ if (!$_SESSION['userid']) {
   </div>
   <!-- end breadcrumb section -->
 
+  
+
   <!-- latest board -->
-  <div class="latest-board mt-150 mb-150">
+  <div class="latest-board mt-80 mb-150">
     <div class="container">
       <a href="addboard.php"><button class="board">เพิ่มโปรโมชั่น</button></a>
+      
       <div class="row">
+      <?php
+        if(isset($_GET['id'])){
+          $id = $_GET['id'];
+        }else{
+          $id = "";
+        }
+                        
+        $sql = "SELECT * FROM `promotion`";
+        $result = mysqli_query($conn,$sql);
+        while($row = mysqli_fetch_array($result)){
+      ?>
         <div class="col-lg-12 col-md-6">
           <div class="single-latest-board">
-            <div class="latest-board-bg board-bg-4"></div>
+            <img src="../assets/img/promotion/<?php echo $row['pic_promotion']?>"
+                   style="height: 300px;
+                          width: 100%;
+                          background-size: cover;
+                          background-position: center;
+                          border-radius: 10px;
+                          background-color: #ddd;
+                          border-bottom-right-radius: 0;
+                          border-bottom-left-radius: 0;">
             <div class="board-text-box">
               <h3>
-                <a href="single-board.php">สวัสดีปีใหม่ 2567 พร้อมโปรโมชั่นลดกระหน่ำ 50 %
+                <a href="single-board.php"><?php echo $row['title']?>
                 </a>
               </h3>
               <p class="excerpt">
-                ระยะโปรโมชั่นที่ใช้ได้ ตั้งแต่วันที่ 1 ม.ค. 67 - 31 ม.ค. 67 - - เงื่อนไขการสั่งซื้อ ผู้ใช้งานสามารถดำเนินการสั่งซื้อได้สูงสุด 5 คำสั่งซื้อ เมื่อซื้อครบ 800 บาท รับส่วนลดโปรโมชั่น Happy new year 2024 สูงสุด 50 %
+                <?php echo $row['detail']?>
               </p>
               <div class="button" style="text-align: right;">
-                <a class="correct" href="editorboard.php"><i class="	fas fa-pen"></i></a>
-                <a class="delete" href="board.php"><i class="fas fa-trash-alt"></i></a>
+                <a class="correct" href="editorboard.php?id=<?php echo $row['promotion_id']?>"><i class="	fas fa-pen"></i></a>
+                <a class="delete" href="CRUDemp/delete_board.php?id=<?php echo $row['promotion_id']?>"><i class="fas fa-trash-alt"></i></a>
               </div>
             </div>
 
           </div>
         </div>
-
+        <?php } ?>
       </div>
-
+      
       <div class="row">
         <div class="container">
           <div class="row">
@@ -182,6 +206,9 @@ if (!$_SESSION['userid']) {
     </div>
   </div>
   <!-- end latest board -->
+
+    
+
   <!-- footer -->
   <div class="footer-area">
     <div class="container">

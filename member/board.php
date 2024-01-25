@@ -1,10 +1,15 @@
 <?php
 session_start();
+require_once "../connectDB.php";
 
 if (!$_SESSION['userid']) {
   header("Location: index.php");
 } else {
+  $id = $_SESSION['userid'];
+  $query = "SELECT * FROM user WHERE user_id = '$id'";
 
+  $result = mysqli_query($conn, $query);
+  $row = mysqli_fetch_array($result);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -87,10 +92,10 @@ if (!$_SESSION['userid']) {
                   <div class="header-icons" style="font-size: 14px; margin-left: 25px">
                     <a href="cart.php"><i class="fas fa-shopping-cart"></i></a>
                     <div class="dropdown" style="float:right;">
-                      <a class="member"><i class="	fas fa-user-friends"></i> <?php echo $_SESSION['username'] ?></a>
+                      <a class="member"><i class="	fas fa-user-friends"></i> <?php echo $row['name']; ?></a>
                       <div class="dropdown-content">
                         <a href="information.php" style="color: black;">ข้อมูลส่วนตัว</a>
-                        <a href="#" style="color: black;">ลบบัญชี</a>
+                        <a href="CRUDuser/deleteUser.php" style="color: black;">ลบบัญชี</a>
                         <a href="../logout.php" style="color: black;">ออกจากระบบ</a>
                       </div>
                     </div>
@@ -126,21 +131,40 @@ if (!$_SESSION['userid']) {
   <div class="latest-board mt-150 mb-150">
     <div class="container">
       <div class="row">
+      <?php
+        if(isset($_GET['id'])){
+          $id = $_GET['id'];
+        }else{
+          $id = "";
+        }
+                        
+        $sql = "SELECT * FROM `promotion`";
+        $result = mysqli_query($conn,$sql);
+        while($row = mysqli_fetch_array($result)){
+      ?>
         <div class="col-lg-12 col-md-6">
           <div class="single-latest-board">
-            <div class="latest-board-bg board-bg-4"></div>
+          <img src="../assets/img/promotion/<?php echo $row['pic_promotion']?>"
+                   style="height: 300px;
+                          width: 100%;
+                          background-size: cover;
+                          background-position: center;
+                          border-radius: 10px;
+                          background-color: #ddd;
+                          border-bottom-right-radius: 0;
+                          border-bottom-left-radius: 0;">
             <div class="board-text-box">
               <h3>
-                <a href="single-board.php">สวัสดีปีใหม่ 2567 พร้อมโปรโมชั่นลดกระหน่ำ 50 %
+                <a href="single-board.php"><?php echo $row['title']?>
                 </a>
               </h3>
               <p class="excerpt">
-                ระยะโปรโมชั่นที่ใช้ได้ ตั้งแต่วันที่ 1 ม.ค. 67 - 31 ม.ค. 67 - - เงื่อนไขการสั่งซื้อ ผู้ใช้งานสามารถดำเนินการสั่งซื้อได้สูงสุด 5 คำสั่งซื้อ เมื่อซื้อครบ 800 บาท รับส่วนลดโปรโมชั่น Happy new year 2024 สูงสุด 50 %
+              <?php echo $row['detail']?>
               </p>
             </div>
           </div>
         </div>
-
+          <?php } ?>
       </div>
 
       <div class="row">
