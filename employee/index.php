@@ -1,5 +1,7 @@
 <?php
 session_start();
+require_once "../connectDB.php";
+
 
 if (!$_SESSION['userid']) {
   header("Location: index.php");
@@ -218,66 +220,22 @@ if (!$_SESSION['userid']) {
           </div>
         </div>
         <div class="row">
+        <?php
+          $sql = "SELECT * FROM `product`";
+          $result = mysqli_query($conn,$sql);
+          while($row = mysqli_fetch_array($result)){
+			  ?>
           <div class="col-lg-4 col-md-6 text-center">
             <div class="single-product-item">
               <div class="product-image">
-                <a href="single-product.php"><img src="../assets/img/products/สินค้า 1.jpg" alt="" /></a>
+                <a href="single-product.php"><img src="../assets/img/products/<?php echo $row['pic_product']?>" alt="" /></a>
               </div>
-              <h4>ผ้าพันคอ(แม่สุริน)</h4>
-              <p class="product-price"> ฿120.00 </p>
+              <h4><?php echo $row['name_product']?></h4>
+              <p class="product-price"><?php echo $row['price']?> บาท  </p>
               <a class="cart-btn"><i class="fas fa-shopping-cart"></i> ใส่ตะกร้า</a>
             </div>
           </div>
-          <div class="col-lg-4 col-md-6 text-center">
-            <div class="single-product-item">
-              <div class="product-image">
-                <a href="single-product.php"><img src="../assets/img/products/สินค้า 2.jpg" alt="" /></a>
-              </div>
-              <h4>ถั่วลายเสือบดผสมเมล็ดงาม้อน</h4>
-              <p class="product-price"> ฿100.00 </p>
-              <a class="cart-btn"><i class="fas fa-shopping-cart"></i> ใส่ตะกร้า</a>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 offset-md-3 offset-lg-0 text-center">
-            <div class="single-product-item">
-              <div class="product-image">
-                <a href="single-product.php"><img src="../assets/img/products/สินค้า 3.jpg" alt="" /></a>
-              </div>
-              <h4>สบู่อะโวคาโด้ผสมวิตามินอีพลัส</h4>
-              <p class="product-price"> ฿150.00 </p>
-              <a class="cart-btn"><i class="fas fa-shopping-cart"></i> ใส่ตะกร้า</a>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 text-center">
-            <div class="single-product-item">
-              <div class="product-image">
-                <a href="single-product.php"><img src="../assets/img/products/สินค้า 4.jpg" alt="" /></a>
-              </div>
-              <h4>ตุ๊กตาสปริงชนเผ่า</h4>
-              <p class="product-price"> ฿19.00 </p>
-              <a class="cart-btn"><i class="fas fa-shopping-cart"></i> ใส่ตะกร้า</a>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 text-center">
-            <div class="single-product-item">
-              <div class="product-image">
-                <a href="single-product.php"><img src="../assets/img/products/สินค้า 5.jpg" alt="" /></a>
-              </div>
-              <h4>ชาเขียวอบพิเศษ</h4>
-              <p class="product-price"> ฿35.00 </p>
-              <a class="cart-btn"><i class="fas fa-shopping-cart"></i> ใส่ตะกร้า</a>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 offset-md-3 offset-lg-0 text-center">
-            <div class="single-product-item">
-              <div class="product-image">
-                <a href="single-product.php"><img src="../assets/img/products/สินค้า 6.jpg" alt="" /></a>
-              </div>
-              <h4>ครีมโลชั่นน้ำแร่บำรุงผิวกายภูโคลน</h4>
-              <p class="product-price"> ฿390.00 </p>
-              <a class="cart-btn"><i class="fas fa-shopping-cart"></i> ใส่ตะกร้า</a>
-            </div>
-          </div>
+          <?php } ?>
         </div>
         <div class="row" style="margin-top: 50px;">
           <div class="col-lg-12 text-center">
@@ -318,63 +276,34 @@ if (!$_SESSION['userid']) {
         </div>
 
         <div class="row">
+        <?php
+          $sql = "SELECT * FROM `new`";
+          $result = mysqli_query($conn,$sql);
+          while($row = mysqli_fetch_array($result)){
+			  ?>
           <div class="col-lg-4 col-md-6">
             <div class="single-latest-news">
               <a href="single-news.php">
-                <div class="latest-news-bg news-bg-1"></div>
+              <img src="../assets/img/latest-news/<?php echo $row['pic_new']?>"
+                   style="height: 300px;
+                          width: 100%;
+                          background-size: cover;
+                          background-position: center;
+                          border-radius: 10px;
+                          background-color: #ddd;
+                          border-bottom-right-radius: 0;
+                          border-bottom-left-radius: 0;">
               </a>
               <div class="news-text-box">
                 <h3>
-                  <a href="single-news.php">
-                    ขอเชิญชวนประชาชนร่วมชิม & ช้อป ในงาน “สินค้าดี BCG Local Plus รักษ์โลก รักแม่ฮ่องสอน”</a>
+                  <a href="single-news.php"><?php echo $row['title']?></a>
                 </h3>
-                <p class="excerpt">
-                  🗓 ระหว่างวันที่ 21-25 ธันวาคม 2566 <br>
-                  ⏰ ตั้งแต่เวลา 08.00 - 16.30 น. <br>
-                  📍 ณ ศูนย์พัฒนาและแสดงสินค้าชุมชนจังหวัดแม่ฮ่องสอน“เฮ็ดก้อเหลียว”
-                  อำเภอเมืองแม่ฮ่องสอน จังหวัดแม่ฮ่องสอน </p>
+                <p class="excerpt"><?php echo $row['detail']?></p>
                 <a href="single-news.php" class="read-more-btn">ดูเพิ่มเติม <i class="fas fa-angle-right"></i></a>
               </div>
             </div>
           </div>
-          <div class="col-lg-4 col-md-6">
-            <div class="single-latest-news">
-              <a href="single-news.php">
-                <div class="latest-news-bg news-bg-2"></div>
-              </a>
-              <div class="news-text-box">
-                <h3>
-                  <a href="single-news.php">จัดกิจกรรม Live สด เกี่ยวกับสินค้าชุมชนจังหวัดแม่ฮ่องสอน พบกับ สาวมากความสามารถคุณลูกพีช เจ้าของช่อง " ลูกพีชChanel "
-                  </a>
-                </h3>
-                <p class="excerpt">
-                  พรุ่งนี้เวลา 19.00 น. ศูนย์พัฒนาและแสดงสินค้าชุมชนจังหวัดแม่ฮ่องสอน จัดกิจกรรม Live สด เกี่ยวกับสินค้าชุมชนจังหวัดแม่ฮ่องสอนพบกับ สาวมากความสามารถคุณลูกพีช เจ้าของช่อง " ลูกพีชChanel "
-
-                </p>
-                <a href="single-news.php" class="read-more-btn">ดูเพิ่มเติม <i class="fas fa-angle-right"></i></a>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 offset-md-3 offset-lg-0">
-            <div class="single-latest-news">
-              <a href="single-news.php">
-                <div class="latest-news-bg news-bg-3"></div>
-              </a>
-              <div class="news-text-box">
-                <h3>
-                  <a href="single-news.php">เปิดเมิงไต ชิมอาหารไทใหญ่ ชมสินค้าท้องถิ่น ครั้งที่ 16 ชวน ช้อป ชิม</a>
-                </h3>
-                <p class="excerpt">
-                  🗓 ระหว่างวันที่ 6 - 10 ธันวาคม 2566 <br>
-                  ⏰ ตั้งแต่เวลา 18.00 - 21.00 น.<br>
-                  📍 ณ ศูนย์ไทใหญ่ศึกษา อำเภอเมือง จังหวัดแม่ฮ่องสอน
-                  เชิญชวนนักท่องเที่ยวหรือชาวแม่ฮ่องสอนทุกท่านมาชม
-                  ผลิตจากฝีมือคนแม่ฮ่องสอน ได้นะคะ💕
-                </p>
-                <a href="single-news.php" class="read-more-btn">ดูเพิ่มเติม <i class="fas fa-angle-right"></i></a>
-              </div>
-            </div>
-          </div>
+          <?php } ?>
         </div>
         <div class="row">
           <div class="col-lg-12 text-center">

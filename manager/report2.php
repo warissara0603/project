@@ -164,7 +164,7 @@ if (!$_SESSION['userid']) {
               <input type="number" min="2024" max="2099" step="1" value="2024" />
             </div>
             <div class="button text-center">
-              <button class="boxed-btn" type="submit">ออกรายงาน</button>
+            <a href="../assets/PDF/hedkorleaw_report_year.pdf"><button class="boxed-btn" type="submit">ออกรายงาน</button></a>
             </div>
           </div>
         </div>

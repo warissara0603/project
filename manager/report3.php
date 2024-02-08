@@ -176,7 +176,7 @@ if (!$_SESSION['userid']) {
               </select>
             </div>
             <div class="button text-center">
-              <button class="boxed-btn" type="submit">ออกรายงาน</button>
+            <a href="../assets/PDF/hedkorleaw_report_sale_month.pdf"><button class="boxed-btn" type="submit">ออกรายงาน</button></a>
             </div>
           </div>
         </div>

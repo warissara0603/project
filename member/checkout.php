@@ -232,15 +232,27 @@ if (!$_SESSION['userid']) {
                     </th>
                   </tr>
                 </thead>
+                <?php
+								$sumAll =0;
+                $num = 1;
+								$sql = "SELECT product.pic_product as pic_product,product.name_product as name_product,product.price as price,cart.amount as amount FROM cart LEFT JOIN product ON cart.product_id = product.product_id WHERE cart.user_id = $id;";
+								$result = mysqli_query($conn,$sql);
+								while($row = mysqli_fetch_array($result)){
+							?>
                 <tbody style="height: 50px">
                   <tr class="price-body-row text-center">
-                    <td class="price-name">1</td>
-                    <td class="price-price">ถั่วลายเสือบดผสมเมล็ดงาม้อน</td>
-                    <td class="price-quantity">฿100.00</td>
-                    <td class="price-quantity">1</td>
-                    <td class="price-quantity">฿100.00</td>
+                    <td class="price-name"><?php echo $num?></td>
+                    <td class="price-price"><?php echo $row['name_product']?></td>
+                    <td class="price-quantity">฿<?php echo $row['price']?></td>
+                    <td class="price-quantity"><?php echo $row['amount'] ?></td>
+                    <?php $sum =  $row['price'] * $row['amount'] ?>
+									  <td class="product-total">฿<?php echo number_format("$sum",2) ?></td>
                   </tr>
                 </tbody>
+                <?php 
+							$sumAll += $row['price'] * $row['amount'];
+              $num++;
+							} ?>
               </table>
             </div>
           </div>
@@ -274,8 +286,8 @@ if (!$_SESSION['userid']) {
                         ">
                       ยอดรวมสินค้าทั้งหมด
                     </th>
-
-                    <td class="bank-price" style="width: 220px">฿150.00</td>
+                    <?php $sumAllNOW = $sumAll+50 ?>
+                    <td class="bank-price" style="width: 220px">฿<?php  echo number_format("$sumAllNOW",2) ?></td>
                   </tr>
                 </tbody>
               </table>
@@ -289,36 +301,36 @@ if (!$_SESSION['userid']) {
           <div class="card-body">
             <div class="billing-address-form">
               <h5>ที่อยู่การจัดส่ง</h5>
-              <form action="index.php">
+              <form action="CRUDuser/insertOrder.php" method="post" enctype="multipart/form-data">
                 <p>
-                  ชื่อ-นามสกุล<input type="text" placeholder="ชื่อ-นามสกุล" />
+                  ชื่อ-นามสกุล<input type="text" placeholder="ชื่อ-นามสกุล" name="name" required/>
                 </p>
                 <p>
-                  ที่อยู่<textarea name="bill" id="bill" cols="30" rows="10" placeholder="ที่อยู่"></textarea>
+                  ที่อยู่<textarea cols="30" rows="10" placeholder="ที่อยู่" name="address" required></textarea>
                 </p>
                 <p>
-                  เบอร์โทร<input type="tel" maxlength="10" size="10" placeholder="เบอร์โทร" />
+                  เบอร์โทร<input type="tel" maxlength="10" size="10" placeholder="เบอร์โทร" name="phone" required/>
                 </p>
-                <p>หมายเหตุ<input type="text" placeholder="หมายเหตุ" /></p>
                 <p style="width: 50%">
-                  จำนวนเงินที่ชำระ (โปรดตรวจสอบจำนวนเงินก่อนโอนเงิน)<input type="text" placeholder="จำนวนเงิน" />
+                  จำนวนเงินที่ชำระ (โปรดตรวจสอบจำนวนเงินก่อนโอนเงิน)<input type="text" placeholder="จำนวนเงิน" name="price" required/>
                 </p>
                 <p style="width: 50%">
                   วันที่ชำระ
-                  <input type="date" id="datemin" name="datemin" min="2023-12-30" />
+                  <input type="date" name="date" min="2023-12-30" required/>
                 </p>
                 <p style="width: 50%">
-                  เวลาที่ชำระ <input type="time" value="" />
+                  เวลาที่ชำระ <input type="time" value="" name="datetime" required/>
                 </p>
                 <label style="color: #bd2000; padding-top: 20px">อัพโหลด หลักฐานการโอน (นามสกุล ไฟล์ .png .jpg เท่านั้น)
-                  <input type="file" id="profile_pic" name="profile_pic" accept=".jpg, .jpeg, .png" /></label>
+                  <input type="file" id="profile_pic" name="profile_pic" accept=".jpg, .jpeg, .png" required/></label>
+                  <div class="button text-center">
+                  <a class="add"><button type="submit" name="submitOrder">ยืนยันการสั่งซื้อ</button></a>
+                  <a class="cancel" href="cart.php"><button type="cancel">ยกเลิก</button></a>
+                </div>
               </form>
             </div>
           </div>
-          <div class="button text-center">
-            <a class="add" href="Orderlist.php"><button type="submit">ยืนยัน การสั่งซื้อ</button></a>
-            <a class="cancel" href="cart.php"><button type="cancel">ยกเลิก</button></a>
-          </div>
+          
         </div>
       </div>
     </div>

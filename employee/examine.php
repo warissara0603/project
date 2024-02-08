@@ -1,10 +1,12 @@
 <?php
 session_start();
+require_once "../connectDB.php";
 
 if (!$_SESSION['userid']) {
   header("Location: index.php");
 } else {
-
+  $id = $_SESSION['userid'];
+  
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -145,47 +147,122 @@ if (!$_SESSION['userid']) {
   <!-- end breadcrumb section -->
 
   <!-- check out section -->
-  <h3 style="margin-top: 100px; text-align: center;">รายการสั่งซื้อ</h3>
+  <h3 style="margin-top: 80px; text-align: center;">รายการสั่งซื้อ</h3>
+  <center><div class="col-lg-6">
+  <div class="card-body">
+            <div class="billing-address-form">
+              <table class="cart-price" style="background-color: #f2f2f2">
+                <thead class="cart-price-head">
+                  <tr class="price-head-row text-center">
+                    <th class="price-name" style="
+                          width: 100px;
+                          height: 50px;
+                          background-color: #bd2000;
+                          color: white;
+                        ">
+                      ลำดับที่
+                    </th>
+                    <th class="price-price" style="
+                          width: 250px;
+                          background-color: #bd2000;
+                          color: white;
+                        ">
+                      ชื่อสินค้า
+                    </th>
+                    <th class="price-quantity" style="
+                          width: 150px;
+                          background-color: #bd2000;
+                          color: white;
+                        ">
+                      ราคา
+                    </th>
+                    <th class="price-total" style="
+                          width: 100px;
+                          background-color: #bd2000;
+                          color: white;
+                        ">
+                      จำนวน
+                    </th>
+                    <th class="price-total" style="
+                          width: 150px;
+                          background-color: #bd2000;
+                          color: white;
+                        ">  
+                      ราคารวม
+                    </th>
+                  </tr>
+                </thead>
+                <?php
+								$sumAll =0;
+                $num = 1;
+								$sql = "SELECT cart.cart_id as cart_id,product.pic_product as pic_product,product.name_product as name_product,product.price as price,cart.amount as amount FROM cart LEFT JOIN product ON cart.product_id = product.product_id";
+								$result = mysqli_query($conn,$sql);
+								while($row = mysqli_fetch_array($result)){
+							?>
+                <tbody style="height: 50px">
+                  <tr class="price-body-row text-center">
+                    <td class="price-name"><?php echo $num?></td>
+                    <td class="price-price"><?php echo $row['name_product']?></td>
+                    <td class="price-quantity">฿<?php echo $row['price']?></td>
+                    <td class="price-quantity"><?php echo $row['amount'] ?></td>
+                    <?php $sum =  $row['price'] * $row['amount'] ?>
+									  <td class="product-total">฿<?php echo number_format("$sum",2) ?></td>
+                  </tr>
+                </tbody>
+                <?php 
+							$sumAll += $row['price'] * $row['amount'];
+              $num++;
+							} ?>
+              </table>
+            </div>
+          </div>
+  </div></center>
   <div class="checkout-section mt-50 mb-150">
     <div class="container">
-      
       <div class="col-lg-12">
+        <h3 style="text-align: center; margin-top: 40px;">ข้อมูลการสั่งซื้อ</h3>
         <div class="card-body">
           <div class="billing-address-form">
-            <form action="" method="post" enctype="multipart/form-data" name="Add_Product" id="Add_Product">
+            <form action="CRUDemp/confirmOrder.php" method="post" enctype="multipart/form-data" name="Add_Product" id="Add_Product">
+            <?php
+              $sql = "SELECT * FROM `oder`";
+              $result = mysqli_query($conn,$sql);
+              while($row = mysqli_fetch_array($result)){
+            ?>
               <p>
-                ชื่อ-นามสกุล<input type="text" placeholder="ชื่อ-นามสกุล" readonly />
+                ชื่อ-นามสกุล<input type="text" placeholder="<?php echo $row['name']?>" readonly />
               </p>
               <p>
-                ที่อยู่<textarea name="bill" id="bill" cols="30" rows="10" placeholder="ที่อยู่" readonly></textarea>
+                ที่อยู่<textarea name="bill" id="bill" cols="30" rows="10" placeholder="<?php echo $row['address']?>" readonly></textarea>
               </p>
               <p>
-                เบอร์โทร<input type="tel" maxlength="10" size="10" placeholder="เบอร์โทร" readonly />
+                เบอร์โทร<input type="tel" maxlength="10" size="10" placeholder="<?php echo $row['phone']?>" readonly />
               </p>
-              <p>หมายเหตุ<input type="text" placeholder="หมายเหตุ" readonly /></p>
               <p style="width: 50%">
-                จำนวนเงินที่ชำระ (โปรดตรวจสอบจำนวนเงินก่อนโอนเงิน)<input type="text" placeholder="จำนวนเงิน" readonly />
+              <?php $sum =  $row['price']?>
+                จำนวนเงินที่ชำระ (โปรดตรวจสอบจำนวนเงินก่อนโอนเงิน)<input type="text" placeholder="<?php echo number_format("$sum",2) ?>" readonly />
               </p>
               <p style="width: 50%">
                 วันที่ชำระ
-                <input type="date" id="datemin" name="datemin" min="2023-12-30" readonly />
+                <input type="date" id="datemin" name="datemin" min="2023-12-30" value="<?php echo $row['date']?>" readonly />
               </p>
               <p style="width: 50%">
-                เวลาที่ชำระ <input type="time" value="" readonly />
+                เวลาที่ชำระ <input type="time" value="<?php echo $row['datetime']?>" readonly />
               </p>
               <center><label style="color: #bd2000; padding-top: 20px">หลักฐานการโอน (นามสกุล ไฟล์ .png .jpg เท่านั้น)
 
                 </label><br>
-                <img src="../assets/img/ex1.jpg" alt="" width="500px">
+                <img src="../assets/img/orders/<?php echo $row['img_order']?>" alt="" width="500px">
               </center>
               <p style="margin-top: 30px;">
-                ***เลขพัสดุ***<input type="text" placeholder="กรุณาใส่เลขพัสดุ" />
+                ***เลขพัสดุ***<input type="text" name="tracking_number" placeholder="กรุณาใส่เลขพัสดุ" />
               </p>
+              <div class="button">
+                <a class="add" href="order.php"><button type="submit" name="confirmOrder">ยืนยัน</button></a>
+                <a class="cancel" href="order.php"><button type="submit">ย้อนกลับ</button></a>
+              </div>
+              <?php } ?>
             </form>
-            <div class="button">
-              <a class="add" href="order.php"><button type="submit">ยืนยัน</button></a>
-              <a class="cancel" href="order.php"><button type="submit">ยกเลิก</button></a>
-            </div>
           </div>
         </div>
       </div>

@@ -161,7 +161,7 @@ if (!$_SESSION['userid']) {
 						</div>
 						<h4><?php echo $row['name_product']?></h4>
 						<p class="product-price"> <?php echo $row['price']?> บาท </p>
-						<a href="cart.php" class="cart-btn"><i class="fas fa-shopping-cart"></i> ใส่ตะกร้า</a>
+						<a href="CRUDuser/cartUser.php?pid=<?php echo $row['product_id']?>" class="cart-btn" name = "addcart"><i class="fas fa-shopping-cart"></i> ใส่ตะกร้า</a>
 					</div>
 				</div>
 				<?php } ?>

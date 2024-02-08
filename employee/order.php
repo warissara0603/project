@@ -1,6 +1,7 @@
 
 <?php
 session_start();
+require_once "../connectDB.php";
 
 if (!$_SESSION['userid']) {
   header("Location: index.php");
@@ -181,7 +182,6 @@ if (!$_SESSION['userid']) {
                   <th class="bank-picture">ชื่อ - นามสกุล</th>
                   <th class="bank-name" style="width: 500px;">ที่อยู่</th>
                   <th class="bank-details">เบอร์โทร</th>
-                  <th class="bank-type">หมายเหตุ</th>
                   <th class="bank-price">จำนวนเงิน</th>
                   <th class="bank-quantity">วันที่</th>
                   <th class="bank-quantity">เวลาที่ชำระ</th>
@@ -190,24 +190,30 @@ if (!$_SESSION['userid']) {
 
                 </tr>
               </thead>
+              <?php
+                $sql = "SELECT `oder_id`, `name`, `address`, `phone`, `price`, `date`, `datetime`, `img_order` FROM `oder` WHERE `oder_id`";
+                $result = mysqli_query($conn,$sql);
+								while($row = mysqli_fetch_array($result)){
+              ?>
               <tbody style="height: 50px">
                 <tr class="bank-body-row text-center">
-                  <td class="bank-number">1</td>
-                  <td class="bank-name">วริศรา</td>
-                  <td class="bank-details">95/6 บ่อสร้าง</td>
-                  <td class="bank-type">0954822801</td>
-                  <td class="bank-details">หมายเหตุ</td>
-                  <td class="bank-price">550</td>
-                  <td class="bank-quantity">12/1/2024</td>
-                  <td class="bank-quantity">19.00</td>
-                  <td class="bank-picture"><img src="../assets/img/ex1.jpg" alt=""></td>
+                  <td class="bank-number"><?php echo $row['oder_id']?></td>
+                  <td class="bank-name"><?php echo $row['name']?></td>
+                  <td class="bank-details"><?php echo $row['address']?></td>
+                  <td class="bank-type"><?php echo $row['phone']?></td>
+                  <?php $sum =  $row['price']?>
+                  <td class="bank-price">฿<?php echo number_format("$sum",2) ?></td>
+                  <td class="bank-quantity"><?php echo $row['date']?></td>
+                  <td class="bank-quantity"><?php echo $row['datetime']?></td>
+                  <td class="bank-picture"><img src="../assets/img/orders/<?php echo $row['img_order']?>" alt=""></td>
                   <td>
                     <div>
-                      <a href="examine.php"><button class="order">ตรวจสอบ</button></a>
+                      <a href="examine.php?id=<?php echo $row['oder_id']?>"><button class="order">ตรวจสอบ</button></a>
                     </div>
                   </td>
                 </tr>
               </tbody>
+              <?php } ?>
             </table>
           </div>
         </div>

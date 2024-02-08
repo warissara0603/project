@@ -142,36 +142,30 @@ if (!$_SESSION['userid']) {
 									<th class="product-remove"></th>
 									<th class="product-image">รูปสินค้า</th>
 									<th class="product-name">ชื่อสินค้า</th>
-									<th class="product-price" style="width: 100px;">ราคา</th>
+									<th class="product-price" style="width: 100px;">ราคา (บาท)</th>
 									<th class="product-quantity">จำนวน</th>
 									<th class="product-total">ราคารวม</th>
 								</tr>
 							</thead>
 							<tbody>
+							<?php
+								$sumAll =0;
+								$sql = "SELECT cart.cart_id as cart_id,product.pic_product as pic_product,product.name_product as name_product,product.price as price,cart.amount as amount FROM cart LEFT JOIN product ON cart.product_id = product.product_id WHERE cart.user_id = $id;";
+								$result = mysqli_query($conn,$sql);
+								while($row = mysqli_fetch_array($result)){
+							?>
 								<tr class="table-body-row">
-									<td class="product-remove"><a href="#"><i class="far fa-window-close"></i></a></td>
-									<td class="product-image"><img src="../assets/img/products/สินค้า 1.jpg" alt=""></td>
-									<td class="product-name">ผ้าพันคอ(แม่สุริน)</td>
-									<td class="product-price">฿120.00</td>
-									<td class="product-quantity"><input type="number" placeholder="1" min="1"></td>
-									<td class="product-total">฿120.00</td>
+									<td class="product-remove"><a href="CRUDuser/deleteProduct.php?id=<?php echo $row['cart_id']?>"><i class="far fa-window-close"></i></a></td>
+									<td class="product-image"><img src="../assets/img/products/<?php echo $row['pic_product']?>"></td>
+									<td class="product-name"><?php echo $row['name_product']?></td>
+									<td class="product-price">฿<?php echo $row['price']?> </td>
+									<td class="product-quantity"><input type="number" placeholder="<?php echo $row['amount'] ?>" min="1"></td>
+									<?php $sum =  $row['price'] * $row['amount'] ?>
+									<td class="product-total">฿<?php echo number_format("$sum",2) ?></td>
 								</tr>
-								<tr class="table-body-row">
-									<td class="product-remove"><a href="#"><i class="far fa-window-close"></i></a></td>
-									<td class="product-image"><img src="../assets/img/products/สินค้า 2.jpg" alt=""></td>
-									<td class="product-name">ถั่วลายเสือบดผสมเมล็ดงาม้อน</td>
-									<td class="product-price">$100.00</td>
-									<td class="product-quantity"><input type="number" placeholder="1" min="1"></td>
-									<td class="product-total">฿100.00</td>
-								</tr>
-								<tr class="table-body-row">
-									<td class="product-remove"><a href="#"><i class="far fa-window-close"></i></a></td>
-									<td class="product-image"><img src="../assets/img/products/สินค้า 3.jpg" alt=""></td>
-									<td class="product-name">สบู่อะโวคาโด้ผสมวิตามินอีพลัส</td>
-									<td class="product-price">$150.00</td>
-									<td class="product-quantity"><input type="number" placeholder="1" min="1"></td>
-									<td class="product-total">฿150.00</td>
-								</tr>
+							<?php 
+							$sumAll += $row['price'] * $row['amount'];
+							} ?>
 							</tbody>
 						</table>
 					</div>
@@ -191,25 +185,26 @@ if (!$_SESSION['userid']) {
 									<td>
 										<h6>ราคารวมสินค้า: </h6>
 									</td>
-									<td>$500</td>
+									<td>฿<?php echo number_format("$sumAll",2) ?></td>
 								</tr>
 								<tr class="total-data">
 									<td>
 										<h6>ค่าส่ง: </h6>
 									</td>
-									<td>$50</td>
+									<td>฿50</td>
 								</tr>
 								<tr class="total-data">
 									<td>
 										<h6>ราคารวม: </h6>
 									</td>
-									<td>$550</td>
+									<?php $sumAllNOW = $sumAll+50 ?>
+									<td>฿<?php  echo number_format("$sumAllNOW",2) ?></td>
 								</tr>
 							</tbody>
 						</table>
 						<div class="cart-buttons">
 							<a href="shop.php" class="boxed-btn">ซื้อสินค้าเพิ่มเติม</a>
-							<a href="checkout.php" class="boxed-btn black">สั่งซื้อสินค้า</a>
+							<a href="checkout.php" name = "checkout" class="boxed-btn black">สั่งซื้อสินค้า</a>
 						</div>
 					</div>
 

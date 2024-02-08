@@ -199,7 +199,7 @@
             <td class="actions-cell">
               <div class="buttons right nowrap">
                 <button class="button small green --jb-modal"  data-target="sample-modal-2" type="button">
-                  <a href="editornews.php"></a><span class="icon"><i class="mdi mdi-eye"></i></span>
+                  <a href="editornews.php"><span class="icon"><i class="mdi mdi-eye"></i></span></a>
                 </button>
                 <button class="button small red --jb-modal" data-target="sample-modal" type="button">
                   <span class="icon"><i class="mdi mdi-trash-can"></i></span>
