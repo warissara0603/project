@@ -1,3 +1,14 @@
+<?php
+session_start();
+
+require_once "../connectDB.php";
+
+if (!$_SESSION['userid']) {
+  header("Location: index.php");
+} else {
+
+?>
+
 <!DOCTYPE html>
 <html lang="en" class="">
 <head>
@@ -189,60 +200,24 @@
             <th></th>
           </tr>
           </thead>
+          <?php
+              $sql = "SELECT * FROM `user` WHERE `status` = 'm';";
+              $result = mysqli_query($conn,$sql);
+              while($row = mysqli_fetch_array($result)){
+            ?>
           <tbody>
           <tr>
+            <td data-label="name" style="padding-left: 20px;"><?php echo $row['name']; ?></td>
+            <td data-label="username"><?php echo $row['username']; ?></td>
+            <td data-label="number"><?php echo $row['password']; ?></td>
             
-            <td data-label="name" style="padding-left: 20px;">warissara yanajit</td>
-            <td data-label="username">film</td>
-            <td data-label="number">12345</td>
-            
-            <td data-label="email">film@gmail.com</td>
-            <td data-label="tel">0954822801</td>
-            <td data-label="text">ต้นเปา อ.สันกำแพง</td>
+            <td data-label="email"><?php echo $row['email']; ?></td>
+            <td data-label="tel"><?php echo $row['phone']; ?></td>
+            <td data-label="text"><?php echo $row['address']; ?></td>
             <td class="actions-cell">
               <div class="buttons right nowrap">
                 <button class="button small green --jb-modal"  data-target="sample-modal-2" type="button">
-                <a href="profile.php"><span class="icon"><i class="mdi mdi-eye"></i></span></a>
-                </button>
-                <button class="button small red --jb-modal" data-target="sample-modal" type="button">
-                  <span class="icon"><i class="mdi mdi-trash-can"></i></span>
-                </button>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            
-            <td data-label="name" style="padding-left: 20px;">warissara yanajit</td>
-            <td data-label="username">film</td>
-            <td data-label="number">12345</td>
-            
-            <td data-label="email">film@gmail.com</td>
-            <td data-label="tel">0954822801</td>
-            <td data-label="text">ต้นเปา อ.สันกำแพง</td>
-            <td class="actions-cell">
-              <div class="buttons right nowrap">
-                <button class="button small green --jb-modal"  data-target="sample-modal-2" type="button">
-                <a href="profile.php"><span class="icon"><i class="mdi mdi-eye"></i></span></a>
-                </button>
-                <button class="button small red --jb-modal" data-target="sample-modal" type="button">
-                  <span class="icon"><i class="mdi mdi-trash-can"></i></span>
-                </button>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            
-            <td data-label="name" style="padding-left: 20px;">warissara yanajit</td>
-            <td data-label="username">film</td>
-            <td data-label="number">12345</td>
-            
-            <td data-label="email">film@gmail.com</td>
-            <td data-label="tel">0954822801</td>
-            <td data-label="text">ต้นเปา อ.สันกำแพง</td>
-            <td class="actions-cell">
-              <div class="buttons right nowrap">
-                <button class="button small green --jb-modal" type="button">
-                <a href="profile.php"><span class="icon"><i class="mdi mdi-eye"></i></span></a>
+                <a href="profile.php?uid=<?php echo $row['user_id']?>"><span class="icon"><i class="mdi mdi-eye"></i></span></a>
                 </button>
                 <button class="button small red --jb-modal" data-target="sample-modal" type="button">
                   <span class="icon"><i class="mdi mdi-trash-can"></i></span>
@@ -251,6 +226,7 @@
             </td>
           </tr>
           </tbody>
+          <?php } ?>
         </table>
         <div class="table-pagination">
           <div class="flex items-center justify-between">
@@ -296,7 +272,7 @@
     </section>
     <footer class="modal-card-foot">
       <button class="button --jb-modal-close">ยกเลิก</button>
-      <button class="button red --jb-modal-close">ยืนยันการลบ</button>
+      <a href="CRUDusers/deleteusers.php?uid=<?php echo $row['user_id']?>"><button class="button red --jb-modal-close">ยืนยันการลบ</button></a>
     </footer>
   </div>
 </div>
@@ -324,3 +300,4 @@
 
 </body>
 </html>
+<?php } ?>

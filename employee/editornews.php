@@ -8,7 +8,8 @@ if (!$_SESSION['userid']) {
   header("Location: index.php");
 } else {
 
-?><!DOCTYPE html>
+?>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>

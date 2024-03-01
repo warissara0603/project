@@ -1,3 +1,14 @@
+<?php
+session_start();
+
+require_once "../connectDB.php";
+
+if (!$_SESSION['userid']) {
+  header("Location: index.php");
+} else {
+
+?>
+
 <!DOCTYPE html>
 <html lang="en" class="">
 <head>
@@ -188,18 +199,27 @@
             <th></th>
           </tr>
           </thead>
+          <?php
+            if(isset($_GET['id'])){
+              $id = $_GET['id'];
+            }else{
+              $id = "";
+            }
+                            
+            $sql = "SELECT * FROM `promotion`";
+            $result = mysqli_query($conn,$sql);
+            while($row = mysqli_fetch_array($result)){
+          ?>
           <tbody>
           <tr>
             
-            <td data-label="username" style="padding-left: 20px;"><img src="../assets/img/hedkorleaw6.png" alt=""></td>
-            <td data-label="number">สวัสดีปีใหม่ 2567 พร้อมโปรโมชั่นลดกระหน่ำ 50 %</td>
-            <td data-label="number">								ระยะโปรโมชั่นที่ใช้ได้ ตั้งแต่วันที่ 1 ม.ค. 67 -  31 ม.ค. 67 - - เงื่อนไขการสั่งซื้อ ผู้ใช้งานสามารถดำเนินการสั่งซื้อได้สูงสุด 5 คำสั่งซื้อ  เมื่อซื้อครบ 800 บาท รับส่วนลดโปรโมชั่น Happy new year 2024  สูงสุด 50 %
-
-            </td>
+            <td data-label="username" style="padding-left: 20px;"><img src="../assets/img/promotion/<?php echo $row['pic_promotion']?>" alt=""></td>
+            <td data-label="number"><?php echo $row['title']?></td>
+            <td data-label="number"><?php echo $row['detail']?></td>
             <td class="actions-cell">
               <div class="buttons right nowrap">
                 <button class="button small green --jb-modal"  data-target="sample-modal-2" type="button">
-                  <a href="editorboard.php"><span class="icon"><i class="mdi mdi-eye"></i></span></a>
+                  <a href="editorboard.php?id=<?php echo $row['promotion_id']?>"><span class="icon"><i class="mdi mdi-eye"></i></span></a>
                 </button>
                 <button class="button small red --jb-modal" data-target="sample-modal" type="button">
                   <span class="icon"><i class="mdi mdi-trash-can"></i></span>
@@ -209,6 +229,7 @@
           </tr>
 
           </tbody>
+          <?php } ?>
         </table>
         <div class="table-pagination">
           <div class="flex items-center justify-between">
@@ -246,15 +267,15 @@
   <div class="modal-background --jb-modal-close"></div>
   <div class="modal-card">
     <header class="modal-card-head">
-      <p class="modal-card-title">ลบผู้ใช้งาน</p>
+      <p class="modal-card-title">ลบโปรโมชั่นสินค้า</p>
     </header>
     <section class="modal-card-body">
-      <p>คุณต้องการที่จะลบผู้ใช้งานนี้ใช่หรือไม่</p>
+      <p>คุณต้องการที่จะลบโปรโมชั่นนี้ใช่หรือไม่</p>
 
     </section>
     <footer class="modal-card-foot">
       <button class="button --jb-modal-close">ยกเลิก</button>
-      <button class="button red --jb-modal-close">ยืนยันการลบ</button>
+      <a href="deleteboard.php?id=<?php echo $row['promotion_id']?>"><button class="button red --jb-modal-close">ยืนยันการลบ</button></a>
     </footer>
   </div>
 </div>
@@ -282,3 +303,4 @@
 
 </body>
 </html>
+<?php } ?>

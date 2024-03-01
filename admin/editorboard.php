@@ -1,3 +1,13 @@
+<?php
+session_start();
+require_once "../connectDB.php";
+
+if (!$_SESSION['userid']) {
+  header("Location: index.php");
+} else {
+
+?>
+
 <!DOCTYPE html>
 <html lang="en" class="">
 <head>
@@ -175,26 +185,39 @@
         </p>
       </header>
       <div class="card-content">
-        <form>
+
+      <?php
+      if(isset($_GET['id'])){
+        $id = $_GET['id'];
+      }else{
+        $id = "";
+      }
+        $sql = "SELECT * FROM `promotion` WHERE promotion_id = '$id'";
+        $result = mysqli_query($conn,$sql);
+        $row = mysqli_fetch_array($result);
+        ?>
+
+        <form action="CRUDboard/updateboard.php" method="post" enctype="multipart/form-data">
+        <input name="promotion_id" type="hidden" value="<?php echo $row['promotion_id']?>" />
           <div class="field">
             <label class="label">ชื่อโปรโมชั่น</label>
             <div class="control">
-              <input type="text" name="password_current" autocomplete="current-password" class="input" required>
+              <input type="text" name="title" autocomplete="current-password" class="input"  value="<?php echo $row['title']?>"required>
             </div>
           </div>
           <div class="field">
             <label class="label">รายละเอียดโปรโมชั่น</label>
             <div class="control">
-            <textarea name="password_confirmation" class="input" cols="132" rows="5"></textarea>
+            <textarea name="detail" class="input" cols="132" rows="5" style="height: 200px;"><?php echo $row['detail']?>"</textarea>
             </div>
           </div>
           <div class="field">
-          <label for="pro_img">รูปภาพโปรโมชั่น : </label>
-          <input name="pro_img" type="file" id="pro_img" size="40" accept=".jpg, .jpeg, .png" style="margin-left: 40px;" />
+          <label for="pic_promotion">รูปภาพโปรโมชั่น : </label>
+          <input name="pic_promotion" type="file" size="40" accept=".jpg, .jpeg, .png" style="margin-left: 20px;" />
         </div>
           <div class="field">
             <div class="control">
-              <button type="submit" class="button green">
+              <button type="submit" name="submitupdatepromotion" class="button green">
                 ยืนยัน
               </button>
               <button type="submit" class="button red">
@@ -282,3 +305,4 @@
 
 </body>
 </html>
+<?php } ?>

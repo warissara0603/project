@@ -1,3 +1,13 @@
+<?php
+session_start();
+require_once "../connectDB.php";
+
+if (!$_SESSION['userid']) {
+  header("Location: index.php");
+} else {
+
+?>
+
 <!DOCTYPE html>
 <html lang="en" class="">
 <head>
@@ -175,54 +185,67 @@
         </p>
       </header>
       <div class="card-content">
-        <form>
+
+      <?php
+        if(isset($_GET['uid'])){
+          $id = $_GET['uid'];
+        }else{
+          $id = "";
+        }
+          $sql = "SELECT * FROM `user` WHERE user_id = '$id'";
+          $result = mysqli_query($conn,$sql);
+          $row = mysqli_fetch_array($result);
+      ?>
+
+        <form action="CRUDusers/updateusers.php" method="post">
+        <input name="user_id" type="hidden" value="<?php echo $row['user_id']?>" />
           <div class="field">
             <label class="label">ชื่อ</label>
             <div class="control">
-              <input type="text" name="password_current" autocomplete="current-password" class="input" required>
+              <input type="text" name="name" class="input" value="<?php echo $row['name']; ?>" required>
             </div>
           </div>
           
           <div class="field">
             <label class="label">ชื่อผู้ใช้</label>
             <div class="control">
-              <input type="text"  name="password" class="input" required>
+              <input type="text"  name="username" class="input" value="<?php echo $row['username']; ?>" required>
             </div>
           </div>
           <hr>
           <div class="field">
             <label class="label">รหัสผ่าน</label>
             <div class="control">
-              <input type="text"  name="password_confirmation" class="input" required>
+              <input type="text"  name="password" class="input" value="<?php echo $row['password']; ?>" required>
             </div>
           </div>
           <hr>
           <div class="field">
             <label class="label">อีเมล์</label>
             <div class="control">
-              <input type="text"  name="password_confirmation" class="input" required>
+              <input type="text"  name="email" class="input" value="<?php echo $row['email']; ?>" required>
             </div>
           </div>
           <div class="field">
             <label class="label">เบอร์โทร</label>
             <div class="control">
-              <input type="tel"  name="password_confirmation" class="input" required>
+              <input type="tel"  name="phone" class="input" value="<?php echo $row['phone']; ?>" required>
             </div>
           </div>
           <div class="field">
             <label class="label">ที่อยู่</label>
             <div class="control">
-            <textarea name="password_confirmation" class="input" cols="132" rows="5"></textarea>
+            <textarea name="address" class="input" cols="132" rows="15"><?php echo $row['address']; ?></textarea>
             </div>
           </div>
           <div class="field">
             <div class="control">
-              <button type="submit" class="button green">
+              <button type="submit" name="submitUpdateUser" class="button green">
                 ยืนยัน
               </button>
-              <button type="submit" class="button red">
+              <a href="/admin/membertables.php"><button type="button" class="button red">
                 ยกเลิก
-              </button>
+              </button></a>
             </div>
           </div>
         </form>
@@ -303,3 +326,4 @@
 
 </body>
 </html>
+<?php } ?>

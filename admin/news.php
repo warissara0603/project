@@ -1,3 +1,14 @@
+<?php
+session_start();
+
+require_once "../connectDB.php";
+
+if (!$_SESSION['userid']) {
+  header("Location: index.php");
+} else {
+
+?>
+
 <!DOCTYPE html>
 <html lang="en" class="">
 <head>
@@ -189,17 +200,22 @@
             <th></th>
           </tr>
           </thead>
+          <?php
+
+              $sql = "SELECT * FROM `new`;";
+              $result = mysqli_query($conn,$sql);
+              while($row = mysqli_fetch_array($result)){
+            ?>
           <tbody>
           <tr>
             
-            <td data-label="username" style="padding-left: 20px;"><img src="../assets/img/latest-news/ประชา1.jpg" alt=""></td>
-            <td data-label="number">จัดกิจกรรม Live สด เกี่ยวกับสินค้าชุมชนจังหวัดแม่ฮ่องสอน พบกับ สาวมากความสามารถคุณลูกพีช เจ้าของช่อง " ลูกพีชChanel "</td>
-            <td data-label="number">พรุ่งนี้เวลา 19.00 น. ศูนย์พัฒนาและแสดงสินค้าชุมชนจังหวัดแม่ฮ่องสอน จัดกิจกรรม Live สด เกี่ยวกับสินค้าชุมชนจังหวัดแม่ฮ่องสอนพบกับ สาวมากความสามารถคุณลูกพีช เจ้าของช่อง " ลูกพีชChanel "
-            </td>
+            <td data-label="username" style="padding-left: 20px;"><img src="../assets/img/latest-news/<?php echo $row['pic_new']?>" alt=""></td>
+            <td data-label="number"><?php echo $row['title']?></td>
+            <td data-label="number"><?php echo $row['detail']?></td>
             <td class="actions-cell">
               <div class="buttons right nowrap">
                 <button class="button small green --jb-modal"  data-target="sample-modal-2" type="button">
-                  <a href="editornews.php"><span class="icon"><i class="mdi mdi-eye"></i></span></a>
+                  <a href="editornews.php?id=<?php echo $row['new_id']?>"><span class="icon"><i class="mdi mdi-eye"></i></span></a>
                 </button>
                 <button class="button small red --jb-modal" data-target="sample-modal" type="button">
                   <span class="icon"><i class="mdi mdi-trash-can"></i></span>
@@ -209,6 +225,7 @@
           </tr>
 
           </tbody>
+          <?php } ?>
         </table>
         <div class="table-pagination">
           <div class="flex items-center justify-between">
@@ -246,15 +263,15 @@
   <div class="modal-background --jb-modal-close"></div>
   <div class="modal-card">
     <header class="modal-card-head">
-      <p class="modal-card-title">ลบผู้ใช้งาน</p>
+      <p class="modal-card-title">ลบข่าวประชาสัมพ์</p>
     </header>
     <section class="modal-card-body">
-      <p>คุณต้องการที่จะลบผู้ใช้งานนี้ใช่หรือไม่</p>
+      <p>คุณต้องการที่จะลบข่าวประชาสัมพ์นี้ใช่หรือไม่</p>
 
     </section>
     <footer class="modal-card-foot">
       <button class="button --jb-modal-close">ยกเลิก</button>
-      <button class="button red --jb-modal-close">ยืนยันการลบ</button>
+      <a href="CRUDnews/deletenews.php?id=<?php echo $row['new_id']?>"><button class="button red --jb-modal-close">ยืนยันการลบ</button></a>
     </footer>
   </div>
 </div>
@@ -282,3 +299,4 @@
 
 </body>
 </html>
+<?php } ?>
