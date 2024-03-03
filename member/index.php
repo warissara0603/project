@@ -222,66 +222,23 @@ if (!$_SESSION['userid']) {
           </div>
         </div>
         <div class="row">
+        <?php
+					$sql = "SELECT * FROM `product`";
+					$result = mysqli_query($conn,$sql);
+					while($row = mysqli_fetch_array($result)){
+				?>
           <div class="col-lg-4 col-md-6 text-center">
             <div class="single-product-item">
               <div class="product-image">
-                <a href="single-product.php"><img src="../assets/img/products/สินค้า 1.jpg" alt="" /></a>
+                <a href="single-product.php?pid=<?php echo $row['product_id']?>"><img src="../assets/img/products/<?php echo $row['pic_product']?>" alt="" /></a>
               </div>
-              <h4>ผ้าพันคอ(แม่สุริน)</h4>
-              <p class="product-price"> ฿120.00 </p>
-              <a href="cart.php" class="cart-btn"><i class="fas fa-shopping-cart"></i> ใส่ตะกร้า</a>
+              <h4><?php echo $row['name_product']?></h4>
+              <p class="product-price"> <?php echo $row['price']?> บาท </p>
+              <a href="cart.php" class="cart-btn mb-2"><i class="fas fa-shopping-cart"></i> ใส่ตะกร้า</a>
+              <a href="https://shopee.co.th/hedkorleaw?utm_content=v7AhqvmwtRwAThK4mwBdnNgesBV" class="cart-btn"><i class="fas fa-shopping-cart"></i> สั่งสินค้า shopee</a>
             </div>
           </div>
-          <div class="col-lg-4 col-md-6 text-center">
-            <div class="single-product-item">
-              <div class="product-image">
-                <a href="single-product.php"><img src="../assets/img/products/สินค้า 2.jpg" alt="" /></a>
-              </div>
-              <h4>ถั่วลายเสือบดผสมเมล็ดงาม้อน</h4>
-              <p class="product-price"> ฿100.00 </p>
-              <a href="cart.php" class="cart-btn"><i class="fas fa-shopping-cart"></i> ใส่ตะกร้า</a>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 offset-md-3 offset-lg-0 text-center">
-            <div class="single-product-item">
-              <div class="product-image">
-                <a href="single-product.php"><img src="../assets/img/products/สินค้า 3.jpg" alt="" /></a>
-              </div>
-              <h4>สบู่อะโวคาโด้ผสมวิตามินอีพลัส</h4>
-              <p class="product-price"> ฿150.00 </p>
-              <a href="cart.php" class="cart-btn"><i class="fas fa-shopping-cart"></i> ใส่ตะกร้า</a>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 text-center">
-            <div class="single-product-item">
-              <div class="product-image">
-                <a href="single-product.php"><img src="../assets/img/products/สินค้า 4.jpg" alt="" /></a>
-              </div>
-              <h4>ตุ๊กตาสปริงชนเผ่า</h4>
-              <p class="product-price"> ฿19.00 </p>
-              <a href="cart.php" class="cart-btn"><i class="fas fa-shopping-cart"></i> ใส่ตะกร้า</a>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 text-center">
-            <div class="single-product-item">
-              <div class="product-image">
-                <a href="single-product.php"><img src="../assets/img/products/สินค้า 5.jpg" alt="" /></a>
-              </div>
-              <h4>ชาเขียวอบพิเศษ</h4>
-              <p class="product-price"> ฿35.00 </p>
-              <a href="cart.php" class="cart-btn"><i class="fas fa-shopping-cart"></i> ใส่ตะกร้า</a>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 offset-md-3 offset-lg-0 text-center">
-            <div class="single-product-item">
-              <div class="product-image">
-                <a href="single-product.php"><img src="../assets/img/products/สินค้า 6.jpg" alt="" /></a>
-              </div>
-              <h4>ครีมโลชั่นน้ำแร่บำรุงผิวกายภูโคลน</h4>
-              <p class="product-price"> ฿390.00 </p>
-              <a href="cart.php" class="cart-btn"><i class="fas fa-shopping-cart"></i> ใส่ตะกร้า</a>
-            </div>
-          </div>
+          <?php } ?>
         </div>
         <div class="row" style="margin-top: 50px;">
           <div class="col-lg-12 text-center">

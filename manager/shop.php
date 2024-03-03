@@ -153,26 +153,154 @@ if (!$_SESSION['userid']) {
 
 			<div class="row product-lists">
 			<?php
-				$sql = "SELECT * FROM `product`";
-				$result = mysqli_query($conn,$sql);
-				while($row = mysqli_fetch_array($result)){
-			?>
-				<div class="col-lg-4 col-md-6 text-center Clothesandapparel">
+					$sql = "SELECT * FROM `product`";
+					$result = mysqli_query($conn,$sql);
+					while($row = mysqli_fetch_array($result)){
+				?>
+				<div class="col-lg-4 col-md-6 text-center *">
 					<div class="single-product-item">
 						<div class="product-image">
-							<a href="single-product.php">
-							<img src="../assets/img/products/<?php echo $row['pic_product']?>"
+							<a href="single-product.php?pid=<?php echo $row['product_id']?>">
+								<img src="assets/img/products/<?php echo $row['pic_product']?>"
 								style="background-position: center; background-size: cover; height: 200px; width: auto;"/></a>
 						</div>
 						<h4><?php echo $row['name_product']?></h4>
 						<p class="product-price"> <?php echo $row['price']?> บาท </p>
-						<a class="cart-btn"><i class="fas fa-shopping-cart"></i> ใส่ตะกร้า</a>
+						<input type="hidden" value="<?php echo $row['type_pro']?>">
+						<a href="cart.php" class="cart-btn mb-2"><i class="fas fa-shopping-cart"></i> ใส่ตะกร้า</a>
+						<a href="https://shopee.co.th/hedkorleaw?utm_content=v7AhqvmwtRwAThK4mwBdnNgesBV" class="cart-btn"><i class="fas fa-shopping-cart"></i> สั่งสินค้า shopee</a>
+					</div>
+				</div>
+				<?php } ?>
+				
+				<?php
+					$sql = "SELECT * FROM `product` WHERE `type_pro` = 'อาหารและเครื่องดื่ม'";
+					$result = mysqli_query($conn,$sql);
+					while($FoodandDrink = mysqli_fetch_array($result)){
+				?>
+				<div class="col-lg-4 col-md-6 text-center FoodandDrink">
+					<div class="single-product-item">
+						<div class="product-image">
+							<a href="single-product.php?pid=<?php echo $row['product_id']?>">
+								<img src="assets/img/products/<?php echo $FoodandDrink['pic_product']?>"
+								style="background-position: center; background-size: cover; height: 200px; width: auto;"/></a>
+						</div>
+						<h4><?php echo $FoodandDrink['name_product']?></h4>
+						<p class="product-price"> <?php echo $FoodandDrink['price']?> บาท </p>
+						<input type="hidden" value="<?php echo $FoodandDrink['type_pro']?>">
+						<a href="cart.php" class="cart-btn mb-2"><i class="fas fa-shopping-cart"></i> ใส่ตะกร้า</a>
+						<a href="https://shopee.co.th/hedkorleaw?utm_content=v7AhqvmwtRwAThK4mwBdnNgesBV" class="cart-btn"><i class="fas fa-shopping-cart"></i> สั่งสินค้า shopee</a>
+					</div>
+				</div>
+				<?php } ?>
+				
+				<?php
+					$sql = "SELECT * FROM `product` WHERE `type_pro` = 'เสื้อผ้าและเครื่องแต่งกาย'";
+					$result = mysqli_query($conn,$sql);
+					while($Clothesandapparel = mysqli_fetch_array($result)){
+				?>
+				<div class="col-lg-4 col-md-6 text-center Clothesandapparel">
+					<div class="single-product-item">
+						<div class="product-image">
+							<a href="single-product.php?pid=<?php echo $row['product_id']?>">
+								<img src="assets/img/products/<?php echo $Clothesandapparel['pic_product']?>"
+								style="background-position: center; background-size: cover; height: 200px; width: auto;"/></a>
+						</div>
+						<h4><?php echo $Clothesandapparel['name_product']?></h4>
+						<p class="product-price"> <?php echo $Clothesandapparel['price']?> บาท </p>
+						<input type="hidden" value="<?php echo $Clothesandapparel['type_pro']?>">
+						<a href="cart.php" class="cart-btn mb-2"><i class="fas fa-shopping-cart"></i> ใส่ตะกร้า</a>
+						<a href="https://shopee.co.th/hedkorleaw?utm_content=v7AhqvmwtRwAThK4mwBdnNgesBV" class="cart-btn"><i class="fas fa-shopping-cart"></i> สั่งสินค้า shopee</a>
+					</div>
+				</div>
+				<?php } ?>
+
+				<?php
+					$sql = "SELECT * FROM `product` WHERE `type_pro` = 'เครื่องประดับ'";
+					$result = mysqli_query($conn,$sql);
+					while($decorations = mysqli_fetch_array($result)){
+				?>
+				<div class="col-lg-4 col-md-6 text-center decorations">
+					<div class="single-product-item">
+						<div class="product-image">
+							<a href="single-product.php?pid=<?php echo $row['product_id']?>">
+								<img src="assets/img/products/<?php echo $decorations['pic_product']?>"
+								style="background-position: center; background-size: cover; height: 200px; width: auto;"/></a>
+						</div>
+						<h4><?php echo $decorations['name_product']?></h4>
+						<p class="product-price"> <?php echo $decorations['price']?> บาท </p>
+						<input type="hidden" value="<?php echo $decorations['type_pro']?>">
+						<a href="cart.php" class="cart-btn mb-2"><i class="fas fa-shopping-cart"></i> ใส่ตะกร้า</a>
+						<a href="https://shopee.co.th/hedkorleaw?utm_content=v7AhqvmwtRwAThK4mwBdnNgesBV" class="cart-btn"><i class="fas fa-shopping-cart"></i> สั่งสินค้า shopee</a>
+					</div>
+				</div>
+				<?php } ?>
+
+				<?php
+					$sql = "SELECT * FROM `product` WHERE `type_pro` = 'เครื่องสำอาง'";
+					$result = mysqli_query($conn,$sql);
+					while($cosmetics = mysqli_fetch_array($result)){
+				?>
+				<div class="col-lg-4 col-md-6 text-center cosmetics">
+					<div class="single-product-item">
+						<div class="product-image">
+							<a href="single-product.php?pid=<?php echo $row['product_id']?>">
+								<img src="assets/img/products/<?php echo $cosmetics['pic_product']?>"
+								style="background-position: center; background-size: cover; height: 200px; width: auto;"/></a>
+						</div>
+						<h4><?php echo $cosmetics['name_product']?></h4>
+						<p class="product-price"> <?php echo $cosmetics['price']?> บาท </p>
+						<input type="hidden" value="<?php echo $cosmetics['type_pro']?>">
+						<a href="cart.php" class="cart-btn mb-2"><i class="fas fa-shopping-cart"></i> ใส่ตะกร้า</a>
+						<a href="https://shopee.co.th/hedkorleaw?utm_content=v7AhqvmwtRwAThK4mwBdnNgesBV" class="cart-btn"><i class="fas fa-shopping-cart"></i> สั่งสินค้า shopee</a>
+					</div>
+				</div>
+				<?php } ?>
+
+				<?php
+					$sql = "SELECT * FROM `product` WHERE `type_pro` = 'สิ่งประดิษฐ์'";
+					$result = mysqli_query($conn,$sql);
+					while($invention = mysqli_fetch_array($result)){
+				?>
+				<div class="col-lg-4 col-md-6 text-center invention">
+					<div class="single-product-item">
+						<div class="product-image">
+							<a href="single-product.php?pid=<?php echo $row['product_id']?>">
+								<img src="assets/img/products/<?php echo $invention['pic_product']?>"
+								style="background-position: center; background-size: cover; height: 200px; width: auto;"/></a>
+						</div>
+						<h4><?php echo $invention['name_product']?></h4>
+						<p class="product-price"> <?php echo $invention['price']?> บาท </p>
+						<input type="hidden" value="<?php echo $invention['type_pro']?>">
+						<a href="cart.php" class="cart-btn mb-2"><i class="fas fa-shopping-cart"></i> ใส่ตะกร้า</a>
+						<a href="https://shopee.co.th/hedkorleaw?utm_content=v7AhqvmwtRwAThK4mwBdnNgesBV" class="cart-btn"><i class="fas fa-shopping-cart"></i> สั่งสินค้า shopee</a>
+					</div>
+				</div>
+				<?php } ?>
+
+				<?php
+					$sql = "SELECT * FROM `product` WHERE `type_pro` = 'สมุนไพร'";
+					$result = mysqli_query($conn,$sql);
+					while($herb = mysqli_fetch_array($result)){
+				?>
+				<div class="col-lg-4 col-md-6 text-center herb">
+					<div class="single-product-item">
+						<div class="product-image">
+							<a href="single-product.php?pid=<?php echo $row['product_id']?>">
+								<img src="assets/img/products/<?php echo $herb['pic_product']?>"
+								style="background-position: center; background-size: cover; height: 200px; width: auto;"/></a>
+						</div>
+						<h4><?php echo $herb['name_product']?></h4>
+						<p class="product-price"> <?php echo $herb['price']?> บาท </p>
+						<input type="hidden" value="<?php echo $herb['type_pro']?>">
+						<a href="cart.php" class="cart-btn mb-2"><i class="fas fa-shopping-cart"></i> ใส่ตะกร้า</a>
+						<a href="https://shopee.co.th/hedkorleaw?utm_content=v7AhqvmwtRwAThK4mwBdnNgesBV" class="cart-btn"><i class="fas fa-shopping-cart"></i> สั่งสินค้า shopee</a>
 					</div>
 				</div>
 				<?php } ?>
 			</div>
 
-			<div class="row">
+			<!-- <div class="row">
 				<div class="col-lg-12 text-center">
 					<div class="pagination-wrap">
 						<ul>
@@ -184,7 +312,7 @@ if (!$_SESSION['userid']) {
 						</ul>
 					</div>
 				</div>
-			</div>
+			</div> -->
 		</div>
 	</div>
 	<!-- end products -->

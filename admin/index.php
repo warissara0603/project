@@ -1,6 +1,8 @@
 <?php
   session_start();
 
+  require_once "../connectDB.php";
+
   if(!$_SESSION['userid']){
     header("Location: index.php");
   } else {
@@ -26,6 +28,7 @@
 
   <!-- Tailwind is included -->
   <link rel="stylesheet" href="css/main.css?v=1628755089081">
+  <link rel="stylesheet" href="https://cdn.datatables.net/2.0.1/css/dataTables.dataTables.css">
 
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png"/>
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png"/>
@@ -185,10 +188,15 @@
           <div class="flex items-center justify-between">
             <div class="widget-label">
               <h3>
-                ลูกค้า
+                สมาชิกทั้งหมด
               </h3>
+              <?php
+                $sql = "SELECT * FROM `user`";
+                $result = mysqli_query($conn,$sql);
+                $num_rows = mysqli_num_rows($result);
+              ?>
               <h1>
-                77
+                <?php echo $num_rows ; ?>
               </h1>
             </div>
             <span class="icon widget-icon text-green-500"><i class="mdi mdi-account-multiple mdi-48px"></i></span>
@@ -202,8 +210,14 @@
               <h3>
                 ขาย
               </h3>
+              <?php
+                $sql = "SELECT * FROM `oder`";
+                $result = mysqli_query($conn,$sql);
+                $row = mysqli_fetch_assoc($result);
+                $sum = $row['price']
+              ?>
               <h1>
-                $7,770
+                <?php echo $sum ?>
               </h1>
             </div>
             <span class="icon widget-icon text-blue-500"><i class="mdi mdi-cart-outline mdi-48px"></i></span>
@@ -216,10 +230,15 @@
           <div class="flex items-center justify-between">
             <div class="widget-label">
               <h3>
-                ผู้เข้าชม
+                ผู้เข้าชมเว็บไซต์
               </h3>
+              <?php
+                $sql = "SELECT * FROM viewcount WHERE viewid = 1;";
+                $result = mysqli_query($conn,$sql);
+                $row = mysqli_fetch_assoc($result);
+              ?>
               <h1>
-                256%
+                <?php echo $row['view_count'];?>
               </h1>
             </div>
             <span class="icon widget-icon text-red-500"><i class="mdi mdi-finance mdi-48px"></i></span>
@@ -235,39 +254,43 @@
       <header class="card-header">
         <p class="card-header-title">
           <span class="icon"><i class="mdi mdi-account-multiple"></i></span>
-          ลูกค้า
+          สมาชิกทั้งหมด
         </p>
         <a href="#" class="card-header-icon">
           <span class="icon"><i class="mdi mdi-reload"></i></span>
         </a>
       </header>
       <div class="card-content">
-        <table>
+        <table id="example" class="display" style="width:100%">
           <thead >
           <tr>
             <th style="width: 200px; padding-left: 20px;">ชื่อ - นามสกุล</th>
             <th style="width: 150px; ">ชื่อผู้ใช้</th>
-            <th style="width: 150px; ">รหัสผ่าน</th>
             <th style="width: 200px; ">อีเมล์</th>
             <th style="width: 200px; ">เบอร์โทรศัพท์</th>
             <th style="width: 200px; ">ที่อยู่</th>
             <th></th>
           </tr>
           </thead>
+          
           <tbody>
+          <?php
+              $sql = "SELECT * FROM `user`";
+              $result = mysqli_query($conn,$sql);
+              while($row = mysqli_fetch_array($result)){
+            ?>
           <tr>
             
-            <td data-label="name" style="padding-left: 20px;">warissara yanajit</td>
-            <td data-label="username">film</td>
-            <td data-label="number">12345</td>
+            <td data-label="name" style="padding-left: 20px;"><?php echo $row['name']; ?></td>
+            <td data-label="username"><?php echo $row['username']; ?></td>
             
-            <td data-label="email">film@gmail.com</td>
-            <td data-label="tel">0954822801</td>
-            <td data-label="text">ต้นเปา อ.สันกำแพง</td>
+            <td data-label="email"><?php echo $row['email']; ?></td>
+            <td data-label="tel"><?php echo $row['phone']; ?></td>
+            <td data-label="text"><?php echo $row['address']; ?></td>
             <td class="actions-cell">
               <div class="buttons right nowrap">
                 <button class="button small green --jb-modal"  data-target="sample-modal-2" type="button">
-                  <a href="profile.php"><span class="icon"><i class="mdi mdi-eye"></i></span></a>
+                  <a href="profile.php?uid=<?php echo $row['user_id']?>"><span class="icon"><i class="mdi mdi-eye"></i></span></a>
                 </button>
                 <button class="button small red --jb-modal" data-target="sample-modal" type="button">
                   <span class="icon"><i class="mdi mdi-trash-can"></i></span>
@@ -275,49 +298,11 @@
               </div>
             </td>
           </tr>
-          <tr>
-            
-            <td data-label="name" style="padding-left: 20px;">warissara yanajit</td>
-            <td data-label="username">film</td>
-            <td data-label="number">12345</td>
-            
-            <td data-label="email">film@gmail.com</td>
-            <td data-label="tel">0954822801</td>
-            <td data-label="text">ต้นเปา อ.สันกำแพง</td>
-            <td class="actions-cell">
-              <div class="buttons right nowrap">
-                <button class="button small green --jb-modal"  data-target="sample-modal-2" type="button">
-                  <a href="profile.php"><span class="icon"><i class="mdi mdi-eye"></i></span></a>
-                </button>
-                <button class="button small red --jb-modal" data-target="sample-modal" type="button">
-                  <span class="icon"><i class="mdi mdi-trash-can"></i></span>
-                </button>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            
-            <td data-label="name" style="padding-left: 20px;">warissara yanajit</td>
-            <td data-label="username">film</td>
-            <td data-label="number">12345</td>
-            
-            <td data-label="email">film@gmail.com</td>
-            <td data-label="tel">0954822801</td>
-            <td data-label="text">ต้นเปา อ.สันกำแพง</td>
-            <td class="actions-cell">
-              <div class="buttons right nowrap">
-                <button class="button small green --jb-modal" type="button">
-                  <a href="profile.php"><span class="icon"><i class="mdi mdi-eye"></i></span></a>
-                </button>
-                <button class="button small red --jb-modal" data-target="sample-modal" type="button">
-                  <span class="icon"><i class="mdi mdi-trash-can"></i></span>
-                </button>
-              </div>
-            </td>
-          </tr>
+          <?php } ?>
           </tbody>
+          
         </table>
-        <div class="table-pagination">
+        <!-- <div class="table-pagination">
           <div class="flex items-center justify-between">
             <div class="buttons">
               <button type="button" class="button active">1</button>
@@ -326,7 +311,7 @@
             </div>
             <small>Page 1 of 3</small>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </section>
@@ -363,7 +348,7 @@
     </section>
     <footer class="modal-card-foot">
       <button class="button --jb-modal-close">ยกเลิก</button>
-      <button class="button red --jb-modal-close">ยืนยันการลบ</button>
+      <a href="CRUDusers/deleteusers.php?uid=<?php echo $row['user_id']?>"><button class="button red --jb-modal-close">ยืนยันการลบ</button></a>
     </footer>
   </div>
 </div>
@@ -373,7 +358,14 @@
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
 <script type="text/javascript" src="js/chart.sample.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/2.0.1/js/dataTables.js"></script>
 
+<script>
+  new DataTable('#example', {
+    pagingType: 'simple_numbers'
+});
+</script>
 
 <script>
   !function(f,b,e,v,n,t,s)
@@ -391,6 +383,7 @@
 
 <!-- Icons below are for demo only. Feel free to use any icon pack. Docs: https://bulma.io/documentation/elements/icon/ -->
 <link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.9.95/css/materialdesignicons.min.css">
+
 
 </body>
 </html>

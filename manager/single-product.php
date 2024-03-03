@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once "../connectDB.php";
 
 if (!$_SESSION['userid']) {
   header("Location: index.php");
@@ -140,16 +141,22 @@ if (!$_SESSION['userid']) {
   <div class="single-product mt-150 mb-150">
     <div class="container">
       <div class="row">
+      <?php
+          $pid = $_GET['pid'];
+					$sql = "SELECT * FROM `product` WHERE product_id = $pid";
+					$result = mysqli_query($conn,$sql);
+					while($row = mysqli_fetch_array($result)){
+			?>
         <div class="col-md-5">
           <div class="single-product-img">
-            <img src="../assets/img/Products/สินค้า 1.jpg" alt="" />
+            <img src="../assets/img/Products/<?php echo $row['pic_product']?>" alt="" />
           </div>
         </div>
         <div class="col-md-7">
           <div class="single-product-content">
-            <h3>ผ้าพันคอ(แม่สุริน)</h3>
-            <p class="single-product-pricing">฿120.00</p>
-            <p>ผ้าพันคอ(แม่สุริน)</p>
+            <h3><?php echo $row['name_product']?></h3>
+            <p class="single-product-pricing"><?php echo $row['price']?> บาท</p>
+            <p><?php echo $row['detail']?></p>
             <div class="single-product-form">
               <form action="index.php">
                 <input type="number" placeholder="0" />
@@ -158,6 +165,7 @@ if (!$_SESSION['userid']) {
             </div>
           </div>
         </div>
+        <?php } ?>
       </div>
     </div>
   </div>
@@ -173,6 +181,7 @@ if (!$_SESSION['userid']) {
         </div>
       </div>
       <div class="row">
+      
         <div class="col-lg-4 col-md-6 text-center">
           <div class="single-product-item">
             <div class="product-image">
@@ -203,6 +212,7 @@ if (!$_SESSION['userid']) {
             <a class="cart-btn"><i class="fas fa-shopping-cart"></i> ใส่ตะกร้า</a>
           </div>
         </div>
+        
       </div>
     </div>
   </div>
